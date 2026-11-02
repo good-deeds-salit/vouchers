@@ -1,14 +1,13 @@
 import { initShareButton } from "./share.js";
 import { loadVouchers, getVisibleVouchers } from "./data.js";
 import { renderVouchers, renderLoadError } from "./render.js";
+import { initModal, openVoucher } from "./modal.js";
 
 initShareButton(document.getElementById("share-button"));
 
 const grid = document.getElementById("voucher-grid");
 
-function openVoucher() {
-  // The details modal is added in the next commit.
-}
+initModal();
 
 async function init() {
   try {

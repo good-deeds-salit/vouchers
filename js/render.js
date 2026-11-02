@@ -1,14 +1,8 @@
 // Builds the compact voucher previews from voucher data. Uses DOM APIs and textContent only.
+import { el } from "./dom.js";
 import { formatShekel } from "./format.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
-
-function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
 
 // Small decorative gift bow, shown on top of the ribbon.
 function createBow() {
