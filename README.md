@@ -28,11 +28,15 @@ npx serve .
 
 ```
 index.html          page
-css/                base, header and layout styles
-js/                 main.js, share.js (more modules arrive in later stages)
-assets/             bunting.svg, images/ (optimized web images)
-data/               vouchers.json (added in Stage B)
+css/                base, header, layout, voucher, modal and banner styles
+js/                 main.js, data.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
+assets/             garland SVGs, images/ (optimized web images)
+data/vouchers.json  voucher data (see below)
 ```
+
+## Voucher data
+
+All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or JavaScript. See `SPEC.md` (section 8) for every field. A voucher is shown only when `published` is `true`, all required fields are present, and its `expirationDate` has not passed (valid through the end of that day, Israel time). Expired records stay in the file. Fictional vouchers must set `"isDemo": true` and are labeled "דוגמה" on the site.
 
 ## Images
 
