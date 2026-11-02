@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "vouchers": [
+    {
+      "id": "v-001",
+      "businessId": "b-001",
+      "businessName": "אבי שף הבית",
+      "offer": "שובר לקנייה חופשית בשווי 100 ₪",
+      "voucherValue": 100,
+      "discountedPrice": 50,
+      "description": "\"אבי שף הבית\" מציע פופ-אפים במרפסת השף עם מנות ייחודיות בעבודת יד, ביניהם \"הר בורגר\" - המבורגריית הבוטיק על ההר. ובנוסף - חבילות אוכל ביתי במשלוח עד הבית, באמצע שבוע וביום שישי. השובר פתוח למימוש לכל תפריט.",
+      "logo": "assets/images/b-001-logo.png",
+      "image": "assets/images/b-001-photo.jpg",
+      "imageAlt": "קולאז' של מנות ושל השף אבי בפעולה",
+      "category": "קולינריה",
+      "secondaryCategories": [],
+      "expirationDate": "2027-02-28",
+      "phone": "054-456-4602",
+      "website": "https://www.aviprivatechef.com",
+      "whatsappGroupUrl": "https://chat.whatsapp.com/INzEPXYWQHU2GMhKLcxyjh",
+      "published": true,
+      "isDemo": false
+    }
+  ]
+}
