@@ -43,9 +43,10 @@ Local businesses donate vouchers. Visitors browse the available offers before th
 
 Exact Hebrew text, in this order:
 
-1. Main title: **השוברים השווים של דוכן המעשים הטובים**
-2. Subtitle: **כל ההכנסות לתרומה**
-3. Introductory sentence: **גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי**
+1. Main title: **השוברים השווים של דוכן המעשים הטובים** — always displayed on exactly two lines: "השוברים השווים" / "של דוכן המעשים הטובים"
+2. Subtitle: **כל ההכנסות לתרומה ❤️** (emoji added in the Stage A visual refinement)
+3. Introductory sentence: **גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי** (no emoji; bold, smaller than the subtitle). Immediately below it, in regular weight and without emoji: **כל השוברים, המוצרים והשירותים נתרמו באהבה גדולה על ידי העסקים המופיעים מטה**
+3a. A delicate gold divider (thin gold lines from both sides, a small outlined gold heart in the center) sits below the two introductory sentences and above the date/time/location row.
 4. Fair date: **27.11.26**
 5. Time: **15:00**
 6. Location: **רחבת המועדון** (final clarification: this shortened form replaces the earlier longer sentence; the title, subtitle and introductory sentence above are unchanged)
@@ -54,7 +55,19 @@ Rules:
 - The introductory sentence appears below the subtitle and above the date, time and location.
 - Exact booth purchase notice: **הרכישה והתשלום מתבצעים בדוכן ביריד בלבד**. It clearly communicates that vouchers are purchased and paid for physically at the fair booth and not online. It is placed after the date/time/location block (or as a slim banner), without changing the order of the elements above.
 - The header is attractive, festive and **compact**, especially on mobile, so voucher previews start high on the screen.
-- A visible website-level share button labeled **שתפו בוואטסאפ** (see section 10).
+- A visible website-level share button labeled **שתפו בוואטסאפ** (see section 10): rounded pill, WhatsApp green background (slightly darkened so white text keeps AA contrast), white WhatsApp icon and white text, subtle shadow, comfortable but not oversized. The booth notice sits next to it when space allows, as regular-weight plain text (no border, background or pill).
+- **Garlands:** exactly two separate colorful garlands hang from opposite upper corners, asymmetrically: the right garland spans about 60% of the page width and the left about 40%, each with a natural downward curve and triangular flags following it. No black or charcoal flags. Their inner ends meet naturally at the top, without overlapping flags, and the title stays unobstructed. On wide screens the pair is capped in size and centered.
+- The visual reference screenshot supplied by the user is inspiration only: its fictional businesses and voucher layouts are never copied, and real data (e.g. Avi Chef) is never altered.
+
+### 4.1 Closing donation banner
+
+Below the **complete** voucher grid (and so also after future filtering) a warm closing banner is shown: soft cream/gold background, thin rounded gold border, generously rounded corners, a subtle outlined icon of hands holding a heart, centered RTL text. Exact texts:
+
+- **כל ההכנסות לתרומה לעמותה נבחרת.** (emphasized)
+- **הצביעו והשפיעו בבחירת העמותה!** (emphasized)
+- בקשו את הברקוד לסריקה מהמוכרת בדוכן (regular)
+
+It feels warm and meaningful, not like an advertisement. There is no online voting form and no QR code on the site; visitors request the QR code physically at the booth.
 
 ## 5. Layout (mobile-first, high priority)
 
@@ -81,6 +94,17 @@ The customer must immediately understand what they pay and what they get.
 - **The actual voucher value (`voucherValue`) is never displayed with a strikethrough.**
 - Strikethrough applies only to `originalValue`, a genuine regular price, and only when that field is present (e.g. a workshop normally 200 ₪, sold for 120 ₪).
 - For a voucher where the buyer pays X and receives value Y (e.g. pay 50 ₪, receive 100 ₪), both are shown explicitly, with the voucher value stated as the thing received and the price as what is paid. See the exact Avi wording in 8.6.
+
+### 6.2 Scroll reveal (Stage B)
+
+Voucher cards progressively reveal as visitors scroll:
+- Smooth fade-in with a subtle upward movement.
+- Triggered with `IntersectionObserver`.
+- A small stagger between adjacent cards where appropriate.
+- Each card is revealed only once.
+- No infinite scrolling, no artificial loading delays, no paid or external libraries.
+- Respects `prefers-reduced-motion` (cards simply appear).
+- Cards stay visible if JavaScript or `IntersectionObserver` is unavailable (the hidden initial state is applied only by JavaScript once the observer is confirmed to exist).
 
 ## 7. Voucher details view (modal)
 
@@ -292,6 +316,6 @@ Compatibility for now: stable `businessId`, `published` flag, `schemaVersion`, p
 
 **Stage A:** loads at mobile and desktop widths; RTL correct; header texts exact and in the specified order (title, subtitle, intro, date, time, location); exact booth notice present; bunting rendered; compact header on mobile; share button works; OG metadata present with placeholder URLs; the 1200×630 social preview image is a separate follow-up task (not part of the first Stage A commit) and must exist before deployment; README with local server instructions; no console errors; no horizontal scroll at 320px; no voucher cards.
 
-**Stage B:** published, non-expired vouchers render from JSON as compact previews (two columns on mobile); preview shows name, offer, voucher value, price, and strikethrough only for a genuine `originalValue`; no "שובר מתנה" text; modal opens by mouse, touch and keyboard, closes by close button and Escape, manages focus, scrolls as one area; links work independently; demo vouchers labeled "דוגמה"; missing fields use fallbacks; expired vouchers excluded (record kept); the Avi voucher shows the exact wording (100 ₪ value, 50 ₪ price), uses the actual logo and photo, has the verbatim description, the phone link (`tel:0544564602`), the website button and the "הצטרפו לקבוצת העדכונים השקטה" button, and is not marked demo; no 75/150 or 100/200 references anywhere; reduced motion respected; no horizontal scroll at 320px.
+**Stage B:** scroll reveal per section 6.2 works (once per card, reduced-motion respected, cards visible without JS/IntersectionObserver); published, non-expired vouchers render from JSON as compact previews (two columns on mobile); preview shows name, offer, voucher value, price, and strikethrough only for a genuine `originalValue`; no "שובר מתנה" text; modal opens by mouse, touch and keyboard, closes by close button and Escape, manages focus, scrolls as one area; links work independently; demo vouchers labeled "דוגמה"; missing fields use fallbacks; expired vouchers excluded (record kept); the Avi voucher shows the exact wording (100 ₪ value, 50 ₪ price), uses the actual logo and photo, has the verbatim description, the phone link (`tel:0544564602`), the website button and the "הצטרפו לקבוצת העדכונים השקטה" button, and is not marked demo; no 75/150 or 100/200 references anywhere; reduced motion respected; no horizontal scroll at 320px.
 
 **Stage C:** filter built from data including "הכול"; no hard-coded categories; primary and secondary matching; accessible; empty state; ambiguous categories reported for manual review.

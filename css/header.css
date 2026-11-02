@@ -1,42 +1,128 @@
-/* Compact festive header: bunting, title block, fair details, booth notice, share button. */
+/* Compact festive header: two garlands, title block, fair details, booth notice, share button. */
 .site-header {
   background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
   border-bottom: 2px solid var(--gold);
   text-align: center;
 }
 
-.bunting {
-  height: 36px;
-  background: url("../assets/bunting.svg") repeat-x top center;
-  background-size: auto 36px;
+/* Two asymmetric corner garlands: the right one spans about 60% of the page width, the left one
+   about 40%. They share one unit scale (--u), so curves and flags match. The upper center stays open.
+   Capped on wide screens so the header never gets tall. */
+.site-header {
+  position: relative;
+  overflow: hidden;
+  --u: min(0.2vw, 1.15px);
+  --garland-h: calc(90 * var(--u));
+}
+
+/* The two garlands share one centered wrapper (500 units wide: 300 right + 200 left), so their inner
+   ends meet at the top. On phones the wrapper is the full page width. */
+.garlands {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: calc(500 * var(--u));
+  height: var(--garland-h);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.garland {
+  position: absolute;
+  top: 0;
+  height: var(--garland-h);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+
+.garland--right {
+  right: 0;
+  width: calc(300 * var(--u));
+  background-image: url("../assets/garland-right.svg");
+}
+
+.garland--left {
+  left: 0;
+  width: calc(200 * var(--u));
+  background-image: url("../assets/garland-left.svg");
 }
 
 .header-inner {
   max-width: 44rem;
   margin-inline: auto;
-  padding: var(--space-1) var(--page-gutter) var(--space-3);
+  padding: calc(var(--garland-h) * 0.85) var(--page-gutter) var(--space-4);
+}
+
+/* Title and subtitle share one typographic style; the title is larger. */
+.site-title,
+.site-subtitle {
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0;
 }
 
 .site-title {
-  font-size: clamp(1.4rem, 6vw, 2.4rem);
-  font-weight: 800;
+  font-size: clamp(1.3rem, 7vw, 2.6rem);
   line-height: 1.2;
-  color: var(--charcoal);
-  text-wrap: balance;
+}
+
+/* The heading always breaks into exactly two lines. */
+.title-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .site-subtitle {
-  margin-top: var(--space-1);
+  margin-top: 0.4rem;
   font-size: clamp(1.05rem, 4vw, 1.4rem);
-  font-weight: 700;
-  color: var(--gold-dark);
 }
 
 .site-intro {
-  margin-top: var(--space-2);
+  margin-top: 0.65rem;
   font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.55;
   color: var(--ink-soft);
   text-wrap: balance;
+}
+
+.site-intro-extra {
+  margin-top: 0.15rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+/* Thin gold divider with a small outlined heart in the center. */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 22rem;
+  margin: 0.6rem auto 0.1rem;
+}
+
+.gold-divider__line {
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(to right, rgba(201, 162, 74, 0.3), var(--gold));
+}
+
+.gold-divider__line:last-child {
+  background: linear-gradient(to left, rgba(201, 162, 74, 0.3), var(--gold));
+}
+
+.gold-divider__heart {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
 }
 
 .fair-details {
@@ -44,7 +130,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-1) var(--space-4);
-  margin-top: var(--space-2);
+  margin-top: 0.5rem;
   font-weight: 600;
 }
 
@@ -65,49 +151,49 @@
   color: var(--gold-dark);
 }
 
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: 0.9rem;
+}
+
+/* Plain supporting text: no border, background or button styling. */
 .booth-notice {
-  display: inline-block;
-  margin-top: var(--space-2);
-  padding: var(--space-1) var(--space-3);
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 400;
   color: var(--charcoal);
 }
 
+/* WhatsApp green pill, white icon and text. The green is darkened slightly so white text
+   keeps AA contrast (4.5:1). */
 .share-button {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-top: var(--space-2);
-  margin-inline-start: var(--space-2);
-  min-height: 2.75rem;
-  padding: var(--space-1) var(--space-4);
+  min-height: 2.6rem;
+  padding: var(--space-1) 1.1rem;
   border-radius: 999px;
-  background: var(--charcoal);
-  color: var(--cream);
+  background: linear-gradient(180deg, #1d9549 0%, #178640 100%);
+  color: #fff;
   font-weight: 700;
   text-decoration: none;
+  box-shadow: 0 2px 6px rgba(23, 134, 64, 0.35), 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .share-button:hover {
-  background: var(--charcoal-deep);
+  background: #12733a;
 }
 
 .share-button .icon {
-  color: var(--gold);
+  color: #fff;
 }
 
 @media (min-width: 40rem) {
-  .bunting {
-    height: 48px;
-    background-size: auto 48px;
-  }
-
   .header-inner {
-    padding-block: var(--space-2) var(--space-4);
+    padding-bottom: var(--space-4);
   }
 
   .site-intro {

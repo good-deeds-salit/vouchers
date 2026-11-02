@@ -19,18 +19,29 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/banner.css">
   <script type="module" src="js/main.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">דלגו לתוכן</a>
 
   <header class="site-header">
-    <div class="bunting" aria-hidden="true"></div>
+    <div class="garlands" aria-hidden="true">
+      <div class="garland garland--right"></div>
+      <div class="garland garland--left"></div>
+    </div>
 
     <div class="header-inner">
-      <h1 class="site-title">השוברים השווים של דוכן המעשים הטובים</h1>
-      <p class="site-subtitle">כל ההכנסות לתרומה</p>
+      <h1 class="site-title"><span class="title-line">השוברים השווים</span> <span class="title-line">של דוכן המעשים הטובים</span></h1>
+      <p class="site-subtitle">כל ההכנסות לתרומה <span aria-hidden="true">❤️</span></p>
       <p class="site-intro">גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי</p>
+      <p class="site-intro-extra">כל השוברים, המוצרים והשירותים נתרמו באהבה גדולה על ידי העסקים המופיעים מטה</p>
+
+      <div class="gold-divider" aria-hidden="true">
+        <span class="gold-divider__line"></span>
+        <svg class="gold-divider__heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span class="gold-divider__line"></span>
+      </div>
 
       <ul class="fair-details">
         <li>
@@ -50,12 +61,14 @@
         </li>
       </ul>
 
-      <p class="booth-notice">הרכישה והתשלום מתבצעים בדוכן ביריד בלבד</p>
+      <div class="header-actions">
+        <p class="booth-notice">הרכישה והתשלום מתבצעים בדוכן ביריד בלבד</p>
 
-      <a class="share-button" id="share-button" href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+        <a class="share-button" id="share-button" href="https://wa.me/" target="_blank" rel="noopener noreferrer">
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 14.96l-.31-.18-3.12.82.83-3.04-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5s1.07 2.9 1.22 3.1c.15.2 2.06 3.3 5.1 4.5 2.52 1 3.03.8 3.58.75.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51z"/></svg>
         <span>שתפו בוואטסאפ</span>
-      </a>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -65,6 +78,21 @@
 
     <!-- Stage B (feature/vouchers): voucher previews are rendered here from data/vouchers.json. -->
     <section id="voucher-grid" class="voucher-grid" aria-label="שוברים"></section>
+
+    <!-- Closing banner: always stays below the complete voucher grid, also after filtering. -->
+    <aside class="donation-banner" aria-label="תרומה והצבעה">
+      <svg class="donation-banner__icon" viewBox="0 0 48 48" aria-hidden="true">
+        <path class="heart" d="M24 26.5l-1.1-1C18.9 22 16.5 19.8 16.5 17c0-2.2 1.7-4 3.9-4 1.4 0 2.8.7 3.6 1.8.8-1.1 2.2-1.8 3.6-1.8 2.2 0 3.9 1.8 3.9 4 0 2.8-2.4 5-6.4 8.5l-1.1 1z"/>
+        <path d="M5 29c3-2.2 7-1.6 10 .9l5 4.1h7"/>
+        <path d="M43 29c-3-2.2-7-1.6-10 .9l-3 2.5"/>
+        <path d="M13 40c4 2 10 3 15 1.5l9-5.5c1.6-1 2.2-2.6 1.4-3.8-.8-1.2-2.4-1.3-3.8-.4L30 34.5"/>
+      </svg>
+      <div class="donation-banner__text">
+        <p class="donation-banner__lead">כל ההכנסות לתרומה לעמותה נבחרת.</p>
+        <p class="donation-banner__vote">הצביעו והשפיעו בבחירת העמותה!</p>
+        <p class="donation-banner__note">בקשו את הברקוד לסריקה מהמוכרת בדוכן</p>
+      </div>
+    </aside>
   </main>
 
   <!-- Stage B: the voucher details modal (<dialog>) will be added here. -->

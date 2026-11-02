@@ -1,0 +1,62 @@
+/* Closing donation and voting banner: warm cream/gold, thin rounded gold border. */
+.donation-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  max-width: 40rem;
+  margin: 1.5rem auto 0.5rem;
+  padding: 1rem 1.1rem;
+  border: 1.5px solid var(--gold);
+  border-radius: 1.75rem;
+  background: linear-gradient(180deg, #fdf8ea 0%, #f6ebcc 100%);
+  text-align: center;
+}
+
+.donation-banner__icon {
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: none;
+  stroke: var(--gold-dark);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.donation-banner__icon .heart {
+  fill: rgba(201, 162, 74, 0.25);
+}
+
+.donation-banner__lead {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.donation-banner__vote {
+  margin-top: 0.1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.donation-banner__note {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 40rem) {
+  .donation-banner {
+    flex-direction: row;
+    gap: var(--space-4);
+    padding: 1.25rem 2rem;
+  }
+
+  .donation-banner__lead,
+  .donation-banner__vote {
+    font-size: 1.2rem;
+  }
+}
