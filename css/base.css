@@ -1,0 +1,95 @@
+/* Design tokens, reset and shared utilities. Mobile-first. */
+:root {
+  --charcoal: #3b3e44;
+  --charcoal-deep: #2b2d32;
+  --cream: #faf5e8;
+  --cream-deep: #efe6cf;
+  --gold: #c9a24a;
+  --gold-dark: #8a6d2b;
+  --ink: #2b2d32;
+  --ink-soft: #5a5d64;
+
+  --font-body: system-ui, -apple-system, "Segoe UI", "Arial Hebrew", Arial, "Noto Sans Hebrew", sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --radius: 0.75rem;
+  --page-gutter: 1rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+h1,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--charcoal);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px var(--gold);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: var(--space-2);
+  top: -4rem;
+  z-index: 10;
+  padding: var(--space-2) var(--space-3);
+  background: var(--charcoal);
+  color: var(--cream);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

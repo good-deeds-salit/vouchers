@@ -1,0 +1,15 @@
+# Original business images supplied by the user (Hebrew filenames, kept untouched locally).
+# Only optimized, ASCII-named copies under assets/images/ are committed.
+# Root-level image patterns are used so the rule is independent of Hebrew filename encoding.
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/*.gif
+/*.heic
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.claude/

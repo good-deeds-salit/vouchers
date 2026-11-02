@@ -1,0 +1,116 @@
+/* Compact festive header: bunting, title block, fair details, booth notice, share button. */
+.site-header {
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-deep) 100%);
+  border-bottom: 2px solid var(--gold);
+  text-align: center;
+}
+
+.bunting {
+  height: 36px;
+  background: url("../assets/bunting.svg") repeat-x top center;
+  background-size: auto 36px;
+}
+
+.header-inner {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding: var(--space-1) var(--page-gutter) var(--space-3);
+}
+
+.site-title {
+  font-size: clamp(1.4rem, 6vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--charcoal);
+  text-wrap: balance;
+}
+
+.site-subtitle {
+  margin-top: var(--space-1);
+  font-size: clamp(1.05rem, 4vw, 1.4rem);
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.site-intro {
+  margin-top: var(--space-2);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+.fair-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-2);
+  font-weight: 600;
+}
+
+.fair-details li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.icon {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  fill: currentColor;
+}
+
+.fair-details .icon {
+  color: var(--gold-dark);
+}
+
+.booth-notice {
+  display: inline-block;
+  margin-top: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.share-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  margin-inline-start: var(--space-2);
+  min-height: 2.75rem;
+  padding: var(--space-1) var(--space-4);
+  border-radius: 999px;
+  background: var(--charcoal);
+  color: var(--cream);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.share-button:hover {
+  background: var(--charcoal-deep);
+}
+
+.share-button .icon {
+  color: var(--gold);
+}
+
+@media (min-width: 40rem) {
+  .bunting {
+    height: 48px;
+    background-size: auto 48px;
+  }
+
+  .header-inner {
+    padding-block: var(--space-2) var(--space-4);
+  }
+
+  .site-intro {
+    font-size: 1.05rem;
+  }
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="56" viewBox="0 0 192 56">
+  <!-- One repeating tile: three pennants hanging from a gently sagging rope. -->
+  <g stroke-linejoin="round">
+    <path d="M12.8 9.76 Q32 16.24 51.2 9.76 L32 46 Z" fill="#3b3e44"/>
+    <path d="M76.8 9.76 Q96 16.24 115.2 9.76 L96 46 Z" fill="#c9a24a"/>
+    <path d="M140.8 9.76 Q160 16.24 179.2 9.76 L160 46 Z" fill="#e3d4ae" stroke="#c9a24a" stroke-width="1"/>
+  </g>
+  <g fill="none" stroke="#8a6d2b" stroke-width="1.6" stroke-linecap="round">
+    <path d="M0 4 Q32 22 64 4"/>
+    <path d="M64 4 Q96 22 128 4"/>
+    <path d="M128 4 Q160 22 192 4"/>
+  </g>
+</svg>

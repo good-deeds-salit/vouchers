@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>השוברים השווים של דוכן המעשים הטובים</title>
+  <meta name="description" content="גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי. כל ההכנסות לתרומה.">
+  <meta name="theme-color" content="#3b3e44">
+
+  <!-- Open Graph. TODO after GitHub Pages deployment: replace the placeholder og:url and og:image
+       with the real absolute URLs. The 1200x630 preview image is still to be created. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  <meta property="og:title" content="השוברים השווים של דוכן המעשים הטובים">
+  <meta property="og:description" content="כל ההכנסות לתרומה. גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי.">
+  <meta property="og:url" content="https://PLACEHOLDER-REPLACE-AFTER-DEPLOY.example/">
+  <meta property="og:image" content="https://PLACEHOLDER-REPLACE-AFTER-DEPLOY.example/assets/images/og-preview.png">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">דלגו לתוכן</a>
+
+  <header class="site-header">
+    <div class="bunting" aria-hidden="true"></div>
+
+    <div class="header-inner">
+      <h1 class="site-title">השוברים השווים של דוכן המעשים הטובים</h1>
+      <p class="site-subtitle">כל ההכנסות לתרומה</p>
+      <p class="site-intro">גלו את השוברים שיהיו זמינים לרכישה בדוכן המעשים הטובים ביריד המושבי</p>
+
+      <ul class="fair-details">
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zm-2 8h14v9H5v-9z"/></svg>
+          <span class="visually-hidden">תאריך:</span>
+          <time datetime="2026-11-27"><bdi dir="ltr">27.11.26</bdi></time>
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3v6l4.5 2.7.8-1.3-3.8-2.3V7H11z"/></svg>
+          <span class="visually-hidden">שעה:</span>
+          <time datetime="15:00"><bdi dir="ltr">15:00</bdi></time>
+        </li>
+        <li>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          <span class="visually-hidden">מיקום:</span>
+          <span>רחבת המועדון</span>
+        </li>
+      </ul>
+
+      <p class="booth-notice">הרכישה והתשלום מתבצעים בדוכן ביריד בלבד</p>
+
+      <a class="share-button" id="share-button" href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 14.96l-.31-.18-3.12.82.83-3.04-.2-.32A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5s1.07 2.9 1.22 3.1c.15.2 2.06 3.3 5.1 4.5 2.52 1 3.03.8 3.58.75.55-.05 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51z"/></svg>
+        <span>שתפו בוואטסאפ</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main" class="site-main">
+    <!-- Stage C (feature/category-filter): category filter is generated here from voucher data. -->
+    <nav id="category-filter" class="category-filter" aria-label="סינון לפי קטגוריה" hidden></nav>
+
+    <!-- Stage B (feature/vouchers): voucher previews are rendered here from data/vouchers.json. -->
+    <section id="voucher-grid" class="voucher-grid" aria-label="שוברים"></section>
+  </main>
+
+  <!-- Stage B: the voucher details modal (<dialog>) will be added here. -->
+</body>
+</html>
