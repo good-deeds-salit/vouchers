@@ -1,7 +1,8 @@
 // Accessible voucher details modal built on the native <dialog> element.
 // showModal() makes the page behind inert, traps focus and closes on Escape.
 import { el, icon } from "./dom.js";
-import { formatShekel, formatDate, phoneHref } from "./format.js";
+import { formatDate, phoneHref } from "./format.js";
+import { createOfferBlock } from "./offer.js";
 import { isValidWhatsAppUrl, isValidWebsiteUrl } from "./data.js";
 
 const ICONS = {
@@ -46,15 +47,7 @@ function buildHeader(voucher) {
 
 function buildOffer(voucher) {
   const box = el("div", "voucher-dialog__offer");
-  box.append(el("p", "voucher-dialog__offer-text", voucher.offer));
-  const price = el("p", "voucher-dialog__price");
-  price.append("מחיר השובר: ", el("strong", "", formatShekel(voucher.discountedPrice)), " בלבד");
-  box.append(price);
-  if (typeof voucher.originalValue === "number") {
-    const original = el("p", "voucher-dialog__original");
-    original.append("מחיר רגיל: ", el("del", "", formatShekel(voucher.originalValue)));
-    box.append(original);
-  }
+  box.append(...createOfferBlock(voucher, "voucher-dialog"));
   return box;
 }
 

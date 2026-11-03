@@ -49,7 +49,7 @@ body.modal-open {
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  margin: var(--space-2) 0 0 auto; /* physical left side in RTL */
+  margin: var(--space-2) auto 0 0; /* physical left side, opposite the logo and title */
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -73,13 +73,22 @@ body.modal-open {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  margin-top: calc(var(--space-2) * -1);
+  margin-top: -2.75rem; /* the header shares a row with the close button */
+}
+
+/* Same Hebrew font family for the business name and the offer text. */
+.voucher-dialog,
+.voucher-dialog__title,
+.voucher-dialog__offer {
+  font-family: var(--font-body);
 }
 
 .voucher-dialog__header {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  min-height: 2.75rem;
+  padding-inline-end: 3.5rem; /* keeps logo and title clear of the close button (left in RTL) */
 }
 
 .voucher-dialog__logo {
@@ -93,38 +102,85 @@ body.modal-open {
 
 .voucher-dialog__title {
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--gold-dark);
+  overflow-wrap: anywhere;
 }
 
+/* Offer summary: centered; the value received is the focal point, the price paid is secondary. */
 .voucher-dialog__offer {
-  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem var(--space-4);
   border-radius: var(--radius);
-  background: linear-gradient(160deg, #464950 0%, #34373c 100%);
-  color: #f7efd9;
+  background: #44474d;
+  color: #f6eedb;
+  text-align: center;
 }
 
-.voucher-dialog__offer-text {
-  font-size: 1.1rem;
+.voucher-dialog__lead {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #ebe2cb;
+}
+
+.voucher-dialog__value {
+  margin-block: 0.1rem 0.2rem;
+  font-size: 2.6rem;
   font-weight: 700;
-  color: #fff7e0;
+  line-height: 1.1;
+  color: #f4e0b0;
 }
 
 .voucher-dialog__price {
-  margin-top: var(--space-1);
-  font-size: 1.05rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
 }
 
-.voucher-dialog__price strong {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: #f0cf7a;
+.voucher-dialog__price::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2.6rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: rgba(214, 180, 100, 0.45);
+}
+
+.voucher-dialog__price-label {
+  font-size: 0.85rem;
+  color: #d8cfb6;
+}
+
+.voucher-dialog__price-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.35rem;
+}
+
+.voucher-dialog__price-amount {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #dcb96a;
+}
+
+.voucher-dialog__price-suffix {
+  font-size: 0.9rem;
+  color: #d8cfb6;
 }
 
 .voucher-dialog__original {
   margin-top: var(--space-1);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #cfc4a8;
 }
 
