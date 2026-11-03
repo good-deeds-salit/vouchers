@@ -65,6 +65,12 @@ These rules apply to every task in this project. Documentation is in English; th
 - Never commit secrets, personal data or unoptimized large images.
 - Do not start any Git action until the user approves the documents.
 
+## Preview and verification
+- Always verify that the browser preview reflects the latest source files before judging visual changes. Browsers cache CSS and JavaScript aggressively, so a stale preview can look "almost identical" to an older version.
+- Use the no-cache local setup: `python tools/dev_server.py` (see README). Do not preview with a plain `python -m http.server`.
+- Check which server and port is being viewed, and that it serves this project folder (for example, compare a served file with the project file). Do not stop or replace a server you did not start without checking first; use another port instead.
+- If a result looks unchanged, do a hard refresh or verify the loaded files before changing the design again.
+
 ## Before proposing a merge
 Run and report on the relevant checks:
 - Serve locally over HTTP (not `file://`); no console errors or failed requests.

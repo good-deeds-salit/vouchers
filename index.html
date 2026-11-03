@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/voucher.css">
+  <link rel="stylesheet" href="css/modal.css">
   <link rel="stylesheet" href="css/banner.css">
   <script type="module" src="js/main.js"></script>
 </head>
@@ -76,7 +78,7 @@
     <!-- Stage C (feature/category-filter): category filter is generated here from voucher data. -->
     <nav id="category-filter" class="category-filter" aria-label="סינון לפי קטגוריה" hidden></nav>
 
-    <!-- Stage B (feature/vouchers): voucher previews are rendered here from data/vouchers.json. -->
+    <!-- Voucher previews are rendered here from data/vouchers.json. -->
     <section id="voucher-grid" class="voucher-grid" aria-label="שוברים"></section>
 
     <!-- Closing banner: always stays below the complete voucher grid, also after filtering. -->
@@ -95,6 +97,14 @@
     </aside>
   </main>
 
-  <!-- Stage B: the voucher details modal (<dialog>) will be added here. -->
+  <!-- Voucher details modal; its content is filled in by js/modal.js. -->
+  <dialog id="voucher-dialog" class="voucher-dialog" aria-labelledby="voucher-dialog-title">
+    <div class="voucher-dialog__panel">
+      <button type="button" class="voucher-dialog__close" aria-label="סגירה" autofocus>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <div id="voucher-dialog-body"></div>
+    </div>
+  </dialog>
 </body>
 </html>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 200" preserveAspectRatio="none">
+  <!-- Satin ribbon band (vertical). Graphite tones with a soft highlight and gentle folds; no text. -->
+  <defs>
+    <linearGradient id="satin" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2a2c31"/>
+      <stop offset="0.1" stop-color="#383b41"/>
+      <stop offset="0.28" stop-color="#50545b"/>
+      <stop offset="0.42" stop-color="#61656d"/>
+      <stop offset="0.55" stop-color="#4b4e55"/>
+      <stop offset="0.8" stop-color="#383b41"/>
+      <stop offset="1" stop-color="#26282c"/>
+    </linearGradient>
+    <linearGradient id="folds" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.2" stop-color="#000" stop-opacity="0.14"/>
+      <stop offset="0.32" stop-color="#fff" stop-opacity="0.07"/>
+      <stop offset="0.58" stop-color="#000" stop-opacity="0.12"/>
+      <stop offset="0.76" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="200" fill="url(#satin)"/>
+  <rect width="40" height="200" fill="url(#folds)"/>
+  <path d="M1.2 0V200" stroke="#9a9ea8" stroke-opacity="0.18" stroke-width="0.9" fill="none"/>
+  <path d="M38.8 0V200" stroke="#000" stroke-opacity="0.3" stroke-width="0.9" fill="none"/>
+</svg>

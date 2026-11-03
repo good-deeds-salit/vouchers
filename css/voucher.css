@@ -1,0 +1,221 @@
+/* Compact voucher previews: a soft graphite card wrapped like a gift, all text centered.
+   Layers: card background -> satin ribbon and bow (decoration) -> content (always above). */
+.voucher-card {
+  --ribbon-x: 15%; /* vertical ribbon, toward the left edge */
+  --ribbon-y: 0.95rem; /* horizontal ribbon in the top band, above all text */
+  --ribbon-size: 1.1rem;
+  position: relative;
+  display: block;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 1rem;
+  background: #44474d;
+  color: #f6eedb;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(43, 45, 50, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Scroll reveal: the pending state is set by js/reveal.js only, so cards stay visible without JavaScript. */
+.voucher-card.reveal-pending {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.voucher-card.reveal-pending.is-revealed {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.2s ease;
+}
+
+.voucher-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(43, 45, 50, 0.28);
+}
+
+/* Gift-wrap ribbon: reusable satin SVG assets in soft graphite tones. Decoration only: subdued, and
+   independent of the voucher text, which always renders above it. */
+.voucher-card__ribbon,
+.voucher-card__bow {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+}
+
+.voucher-card__ribbon {
+  opacity: 0.85;
+}
+
+.voucher-card__ribbon--vertical {
+  inset-block: 0;
+  left: var(--ribbon-x);
+  width: var(--ribbon-size);
+  background-image: url("../assets/ribbon-vertical.svg");
+}
+
+.voucher-card__ribbon--horizontal {
+  inset-inline: 0;
+  top: var(--ribbon-y);
+  height: var(--ribbon-size);
+  transform: translateY(-50%);
+  opacity: 0.65; /* the horizontal band stays quieter than the vertical one */
+  background-image: url("../assets/ribbon-horizontal.svg");
+}
+
+.voucher-card__bow {
+  top: var(--ribbon-y);
+  left: calc(var(--ribbon-x) + var(--ribbon-size) / 2);
+  width: 2.8rem;
+  aspect-ratio: 160 / 124;
+  transform: translate(-50%, -48%);
+  opacity: 0.95;
+  background-size: contain;
+  background-position: center;
+  background-image: url("../assets/ribbon-bow.svg");
+}
+
+/* All text sits above the ribbon layers, with a soft halo for contrast where they overlap. */
+.voucher-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.3rem 0.6rem 0.7rem; /* the top band is reserved for the ribbon and bow */
+  text-shadow: 0 0 3px rgba(30, 31, 35, 0.85), 0 1px 1px rgba(30, 31, 35, 0.5);
+}
+
+/* A) Business name */
+.voucher-card__name {
+  margin-bottom: 0.4rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff8e6;
+  overflow-wrap: anywhere;
+}
+
+/* B) What the buyer receives: the focal point */
+.voucher-card__lead {
+  font-size: 0.78rem;
+  text-wrap: balance;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #ebe2cb;
+}
+
+.voucher-card__value {
+  margin-block: 0.05rem 0.1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.05;
+  color: #f4e0b0; /* warm champagne */
+  white-space: nowrap;
+}
+
+/* C) What the buyer pays: clear, but secondary */
+.voucher-card__price {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.4rem;
+  padding-top: 0.4rem;
+}
+
+/* one delicate divider between the value and the price */
+.voucher-card__price::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2.2rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: rgba(214, 180, 100, 0.45);
+}
+
+.voucher-card__price-label {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #d8cfb6;
+}
+
+.voucher-card__price-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.3rem;
+}
+
+.voucher-card__price-amount {
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #dcb96a; /* muted warm gold */
+  white-space: nowrap;
+}
+
+.voucher-card__price-suffix {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #d8cfb6;
+}
+
+.voucher-card__original {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #cfc4a8;
+}
+
+.demo-badge {
+  margin-top: 0.4rem;
+  padding: 0 0.5rem;
+  border: 1px solid #f0cf7a;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f0cf7a;
+}
+
+.voucher-grid__message {
+  grid-column: 1 / -1;
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 40rem) {
+  .voucher-card {
+    --ribbon-y: 1.1rem;
+  }
+
+  .voucher-card__content {
+    padding: 2.4rem 0.9rem 1rem;
+  }
+
+  .voucher-card__name {
+    font-size: 1.15rem;
+  }
+
+  .voucher-card__lead {
+    font-size: 0.9rem;
+  }
+
+  .voucher-card__value {
+    font-size: 2.3rem;
+  }
+
+  .voucher-card__price-amount {
+    font-size: 1.75rem;
+  }
+}

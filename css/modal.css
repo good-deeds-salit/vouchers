@@ -1,0 +1,290 @@
+/* Voucher details modal: centered dialog on desktop, near full-screen bottom sheet on mobile. */
+body.modal-open {
+  overflow: hidden;
+}
+
+.voucher-dialog {
+  width: min(100% - 2rem, 34rem);
+  max-height: min(92dvh, 48rem);
+  padding: 0;
+  border: 1px solid var(--gold);
+  border-radius: 1.25rem;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-y: auto; /* the single scroll area */
+  overscroll-behavior: contain;
+}
+
+.voucher-dialog::backdrop {
+  background: rgba(43, 45, 50, 0.65);
+}
+
+.voucher-dialog[open] {
+  animation: dialog-in 0.25s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .voucher-dialog[open] {
+    animation: none;
+  }
+}
+
+.voucher-dialog__panel {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+/* Always-visible close button, kept in view while the content scrolls. */
+.voucher-dialog__close {
+  position: sticky;
+  top: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: var(--space-2) auto 0 0; /* physical left side, opposite the logo and title */
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--cream);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(43, 45, 50, 0.3);
+  z-index: 1;
+}
+
+.voucher-dialog__close svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+#voucher-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: -2.75rem; /* the header shares a row with the close button */
+}
+
+/* Same Hebrew font family for the business name and the offer text. */
+.voucher-dialog,
+.voucher-dialog__title,
+.voucher-dialog__offer {
+  font-family: var(--font-body);
+}
+
+.voucher-dialog__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding-inline-end: 3.5rem; /* keeps logo and title clear of the close button (left in RTL) */
+}
+
+.voucher-dialog__logo {
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.9rem;
+  object-fit: contain;
+  background: #fff;
+}
+
+.voucher-dialog__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--gold-dark);
+  overflow-wrap: anywhere;
+}
+
+/* Offer summary: centered; the value received is the focal point, the price paid is secondary. */
+.voucher-dialog__offer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem var(--space-4);
+  border-radius: var(--radius);
+  background: #44474d;
+  color: #f6eedb;
+  text-align: center;
+}
+
+.voucher-dialog__lead {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #ebe2cb;
+}
+
+.voucher-dialog__value {
+  margin-block: 0.1rem 0.2rem;
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #f4e0b0;
+}
+
+.voucher-dialog__price {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+}
+
+.voucher-dialog__price::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2.6rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: rgba(214, 180, 100, 0.45);
+}
+
+.voucher-dialog__price-label {
+  font-size: 0.85rem;
+  color: #d8cfb6;
+}
+
+.voucher-dialog__price-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 0.35rem;
+}
+
+.voucher-dialog__price-amount {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #dcb96a;
+}
+
+.voucher-dialog__price-suffix {
+  font-size: 0.9rem;
+  color: #d8cfb6;
+}
+
+.voucher-dialog__original {
+  margin-top: var(--space-1);
+  font-size: 0.85rem;
+  color: #cfc4a8;
+}
+
+.voucher-dialog__photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  object-fit: cover;
+  background: var(--cream-deep);
+}
+
+.voucher-dialog__description {
+  line-height: 1.65;
+}
+
+.voucher-dialog__details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid rgba(201, 162, 74, 0.5);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.voucher-dialog__details dt {
+  font-weight: 700;
+  color: var(--gold-dark);
+}
+
+.voucher-dialog__details dd {
+  margin: 0;
+}
+
+.voucher-dialog__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 2.5rem;
+  color: var(--charcoal);
+  font-weight: 700;
+  unicode-bidi: isolate;
+}
+
+.voucher-dialog__phone .icon {
+  color: var(--gold-dark);
+}
+
+.voucher-dialog__terms h3 {
+  margin: 0 0 var(--space-1);
+  font-size: 1rem;
+  color: var(--gold-dark);
+}
+
+.voucher-dialog__terms p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.voucher-dialog__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  flex: 1 1 12rem;
+  min-height: 2.75rem;
+  padding: var(--space-1) 1.1rem;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(43, 45, 50, 0.25);
+}
+
+.action-button--site {
+  background: var(--charcoal);
+}
+
+.action-button--site:hover {
+  background: var(--charcoal-deep);
+}
+
+.action-button--whatsapp {
+  background: linear-gradient(180deg, #1d9549 0%, #178640 100%);
+}
+
+.action-button--whatsapp:hover {
+  background: #12733a;
+}
+
+@media (max-width: 39.99rem) {
+  .voucher-dialog {
+    width: 100%;
+    max-width: none;
+    max-height: 92dvh;
+    margin: auto 0 0;
+    border-width: 2px 0 0;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
+}

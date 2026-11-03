@@ -100,29 +100,36 @@
 .gold-divider {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0.7rem;
   max-width: 22rem;
-  margin: 0.6rem auto 0.1rem;
+  margin: 0.6rem auto 0.2rem;
 }
 
 .gold-divider__line {
   flex: 1;
-  height: 1.5px;
-  background: linear-gradient(to right, rgba(201, 162, 74, 0.3), var(--gold));
+  height: 2.5px;
+  border-radius: 2px;
+  background: linear-gradient(to right, rgba(138, 109, 43, 0.45), #a5812e);
 }
 
 .gold-divider__line:last-child {
-  background: linear-gradient(to left, rgba(201, 162, 74, 0.3), var(--gold));
+  background: linear-gradient(to left, rgba(138, 109, 43, 0.45), #a5812e);
 }
 
+/* Outlined (not filled) heart, about 30% larger, with a 2.5px outline that keeps its width at any size. */
 .gold-divider__heart {
   flex: none;
-  width: 1rem;
-  height: 1rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  overflow: visible;
   fill: none;
-  stroke: var(--gold);
-  stroke-width: 1.6;
+  stroke: #a5812e;
+  stroke-width: 2.5px;
   stroke-linejoin: round;
+}
+
+.gold-divider__heart path {
+  vector-effect: non-scaling-stroke;
 }
 
 .fair-details {
