@@ -28,10 +28,10 @@ export function createVoucherCard(voucher, onOpen) {
   return card;
 }
 
-export function renderVouchers(container, vouchers, onOpen) {
+export function renderVouchers(container, vouchers, onOpen, emptyMessage = "אין כרגע שוברים להצגה.") {
   container.replaceChildren();
   if (vouchers.length === 0) {
-    container.append(el("p", "voucher-grid__message", "אין כרגע שוברים להצגה."));
+    container.append(el("p", "voucher-grid__message", emptyMessage));
     return [];
   }
   const cards = vouchers.map((voucher) => createVoucherCard(voucher, onOpen));

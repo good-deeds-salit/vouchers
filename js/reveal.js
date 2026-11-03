@@ -3,9 +3,10 @@
 const STAGGER_MS = 70;
 const MAX_STAGGER_STEPS = 4;
 
+// Returns a function that stops observing (used before the cards are replaced, e.g. by the category filter).
 export function initScrollReveal(cards) {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!("IntersectionObserver" in window) || reducedMotion || cards.length === 0) return;
+  if (!("IntersectionObserver" in window) || reducedMotion || cards.length === 0) return () => {};
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -35,4 +36,5 @@ export function initScrollReveal(cards) {
     card.classList.add("reveal-pending");
     observer.observe(card);
   }
+  return () => observer.disconnect();
 }
