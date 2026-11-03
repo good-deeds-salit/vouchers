@@ -6,23 +6,24 @@ Plain HTML, CSS and JavaScript. No frameworks, no build step, no backend, no cos
 
 See `SPEC.md` (what we build) and `practice.md` (how we work).
 
-## Preview locally (free)
+## Preview locally (free, no cache)
 
-The site loads data with `fetch` (from Stage B), so open it through a local web server, not by double-clicking `index.html`.
+The site loads data with `fetch`, so open it through a local web server, not by double-clicking `index.html`.
 
-With Python (already installed on most machines):
-
-```bash
-python -m http.server 8000
-```
-
-Then open <http://localhost:8000> in your browser. Stop the server with Ctrl+C.
-
-Alternative, if Node.js is installed:
+Use the included development server. It uses only Python's standard library and sends no-cache headers, so a normal browser refresh always shows the latest HTML, CSS and JavaScript:
 
 ```bash
-npx serve .
+python tools/dev_server.py
 ```
+
+Then open <http://localhost:8000>. Stop the server with Ctrl+C.
+
+- Another port: `python tools/dev_server.py --port 8001`.
+- If port 8000 is already in use, the script says so and exits. It never stops another server. An older plain server (such as `python -m http.server`) may serve cached, outdated files, so stop it yourself or use a different port.
+- If a page ever looks out of date, do a hard refresh (Ctrl+Shift+R) and check the port you are viewing.
+- The dev server is for local development only. GitHub Pages serves the site itself and never uses `tools/dev_server.py`.
+
+Alternative, if Node.js is installed: `npx serve .` (this one may cache files; prefer the dev server above).
 
 ## Folder structure
 
@@ -30,7 +31,8 @@ npx serve .
 index.html          page
 css/                base, header, layout, voucher, modal and banner styles
 js/                 main.js, data.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
-assets/             garland SVGs, images/ (optimized web images)
+assets/             garland and ribbon SVGs, images/ (optimized web images)
+tools/              dev_server.py (local no-cache development server)
 data/vouchers.json  voucher data (see below)
 ```
 
