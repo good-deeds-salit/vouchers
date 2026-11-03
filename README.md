@@ -29,8 +29,8 @@ Alternative, if Node.js is installed: `npx serve .` (this one may cache files; p
 
 ```
 index.html          page
-css/                base, header, layout, voucher, modal and banner styles
-js/                 main.js, data.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
+css/                base, header, layout, filter, voucher, modal and banner styles
+js/                 main.js, data.js, filter.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
 assets/             garland and ribbon SVGs, images/ (optimized web images)
 tools/              dev_server.py (local no-cache development server)
 data/vouchers.json  voucher data (see below)
@@ -39,6 +39,10 @@ data/vouchers.json  voucher data (see below)
 ## Voucher data
 
 All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or JavaScript. See `SPEC.md` (section 8) for every field. A voucher is shown only when `published` is `true`, all required fields are present, and its `expirationDate` has not passed (valid through the end of that day, Israel time). Expired records stay in the file. Fictional vouchers must set `"isDemo": true` and are labeled "דוגמה" on the site.
+
+## Category filter
+
+The filter above the voucher grid is generated in the browser from the `category` and `secondaryCategories` of the vouchers that are currently shown (published and not expired); no category names are hard-coded. "הכול" is always first and selected by default, and a voucher matches a category by its primary or secondary category. The filter is shown even when there is only one category, and hidden when there are none. Selecting the already active option does nothing. To add a category, just use it in a voucher in `data/vouchers.json`.
 
 ## Images
 
