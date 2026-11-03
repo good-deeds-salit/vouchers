@@ -61,6 +61,15 @@ function buildPhoto(voucher) {
   return photo;
 }
 
+// The description keeps its paragraphs: each line break in the data becomes its own <p>.
+function buildDescription(voucher) {
+  const wrapper = el("div", "voucher-dialog__description");
+  for (const paragraph of voucher.description.split(/\r?\n/)) {
+    if (paragraph.trim() !== "") wrapper.append(el("p", "", paragraph));
+  }
+  return wrapper;
+}
+
 function buildDetails(voucher) {
   const list = el("dl", "voucher-dialog__details");
   list.append(el("dt", "", "תוקף עד"), el("dd", "", formatDate(voucher.expirationDate)));
@@ -110,7 +119,7 @@ export function openVoucher(voucher, trigger) {
     buildHeader(voucher),
     buildOffer(voucher),
     buildPhoto(voucher),
-    el("p", "voucher-dialog__description", voucher.description),
+    buildDescription(voucher),
     buildDetails(voucher),
     buildTerms(voucher),
     buildActions(voucher),

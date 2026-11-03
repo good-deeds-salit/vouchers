@@ -196,6 +196,10 @@ body.modal-open {
   line-height: 1.65;
 }
 
+.voucher-dialog__description p + p {
+  margin-top: var(--space-3);
+}
+
 .voucher-dialog__details {
   display: grid;
   grid-template-columns: auto 1fr;
