@@ -72,7 +72,7 @@ function buildDescription(voucher) {
 
 function buildDetails(voucher) {
   const list = el("dl", "voucher-dialog__details");
-  list.append(el("dt", "", "תוקף עד"), el("dd", "", formatDate(voucher.expirationDate)));
+  list.append(el("dt", "", "בתוקף עד"), el("dd", "", formatDate(voucher.expirationDate)));
   if (voucher.phone) {
     const phone = el("a", "voucher-dialog__phone");
     phone.href = phoneHref(voucher.phone);
