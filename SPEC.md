@@ -155,8 +155,10 @@ Voucher data lives in `data/vouchers.json`, separate from HTML, and is rendered 
 | `offer` | string | yes | Hebrew voucher offer text. |
 | `voucherValue` | number | yes | **Approved.** The amount the customer can redeem, in ILS. Never struck through. |
 | `discountedPrice` | number | yes | **Approved name** (replaces the earlier draft name `price`). The price the customer pays at the charity booth, in ILS. |
+| `quantity` | number | no | **Optional, informational only.** Whole number of vouchers offered, shown as "כמות שוברים: N" below the price on the card and in the modal. Hidden when missing or not a positive whole number. Not live inventory: it is never reduced, and there is no stock management or sold-out behavior. |
 | `originalValue` | number | no | **Optional.** A genuine regular price, in ILS, when applicable. The only value ever struck through. |
-| `description` | string | yes | Full business description (modal), stored and shown verbatim. |
+| `description` | string | yes | Full business description (modal), stored and shown verbatim. A line break (`
+`) separates paragraphs; the modal renders each as its own paragraph. |
 | `logo` | string | no | Relative path under `assets/images/`. |
 | `image` | string | no | Relative path under `assets/images/`. |
 | `imageAlt` | string | no | Hebrew alt text for `image`. Logo alt defaults to the business name. |
@@ -200,6 +202,7 @@ A voucher is shown publicly only if `published` is `true` **and** it is not expi
 | `category` | קולינריה (no secondary categories; no review needed) |
 | `voucherValue` | 100 |
 | `discountedPrice` | 50 |
+| `quantity` | 3 |
 | `originalValue` | not specified (field omitted) |
 | `expirationDate` | 2027-02-28 (displayed 28.02.2027) |
 | `website` | https://www.aviprivatechef.com |
@@ -219,9 +222,14 @@ The customer pays 50 ₪ and receives 100 ₪ to spend freely on the business's 
 
 Full description, exact text, to be stored and displayed **without rewriting**:
 
-> "אבי שף הבית" מציע פופ-אפים במרפסת השף עם מנות ייחודיות בעבודת יד, ביניהם "הר בורגר" - המבורגריית הבוטיק על ההר. ובנוסף - חבילות אוכל ביתי במשלוח עד הבית, באמצע שבוע וביום שישי. השובר פתוח למימוש לכל תפריט.
+> "אבי שף הבית" מזמין אתכם ליהנות מפופ-אפים מיוחדים במרפסת השף, עם מנות ייחודיות בעבודת יד. בין הפופ-אפים תוכלו למצוא גם את "הר בורגר" - המבורגריית הבוטיק על ההר.
+>
+> בנוסף, תוכלו ליהנות מחבילות אוכל ביתי וטעים במשלוח עד הבית, באמצע השבוע ובימי שישי.
+>
+> השובר ניתן למימוש בכל תפריטי העסק, לבחירתכם.
 
-(When stored in JSON, the inner double quotes are escaped; the displayed text is unchanged.)
+(This replaces the earlier wording. It has three paragraphs. When stored in JSON, the inner double quotes are escaped and paragraphs are separated by `
+`; the modal shows each as its own paragraph and the text is unchanged.)
 
 The details modal shows a WhatsApp button labeled **הצטרפו לקבוצת העדכונים השקטה** next to the website button.
 
@@ -309,6 +317,7 @@ The initial architecture stays compatible with, but does not implement:
 - Publishing only approved vouchers and images (hence `published`).
 - Using optimized local website images instead of direct Google Drive image links.
 - Future Google Sheets integration for business and voucher data. Business IDs and voucher IDs are distinct identifiers, and the import must support multiple vouchers belonging to the same business.
+- Google Sheets column **"כמות שוברים"** maps to the `quantity` field (informational number only).
 - AI-assisted category inference during import (offline only, never on the public site).
 
 Compatibility for now: stable `businessId`, `published` flag, `schemaVersion`, path-based image fields fillable by an import script, and no assumption of a fixed category list. A future `driveFileIds` field may be added later with approval; not now.
