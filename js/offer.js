@@ -16,7 +16,7 @@ export function splitOffer(offerText) {
   };
 }
 
-// Returns the nodes: description line(s), the large value received, and the price paid.
+// Returns the nodes: description line(s), the large value received, the price paid and the optional quantity.
 // `prefix` is the BEM block name of the caller (e.g. "voucher-card").
 export function createOfferBlock(voucher, prefix) {
   const { lead, tail } = splitOffer(voucher.offer);
@@ -35,6 +35,13 @@ export function createOfferBlock(voucher, prefix) {
   );
   price.append(el("span", `${prefix}__price-label`, "מחיר השובר:"), line);
   nodes.push(price);
+
+  // Informational only (not live stock): shown when quantity is a positive whole number.
+  if (Number.isInteger(voucher.quantity) && voucher.quantity > 0) {
+    const quantity = el("span", `${prefix}__quantity`, "כמות שוברים: ");
+    quantity.append(el("bdi", "", String(voucher.quantity)));
+    nodes.push(quantity);
+  }
 
   if (typeof voucher.originalValue === "number") {
     const original = el("span", `${prefix}__original`);

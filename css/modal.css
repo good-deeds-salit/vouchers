@@ -178,6 +178,13 @@ body.modal-open {
   color: #d8cfb6;
 }
 
+.voucher-dialog__quantity {
+  margin-top: var(--space-1);
+  font-size: 0.8rem;
+  color: #cfc4a8;
+  opacity: 0.85;
+}
+
 .voucher-dialog__original {
   margin-top: var(--space-1);
   font-size: 0.85rem;

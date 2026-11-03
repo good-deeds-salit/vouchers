@@ -38,7 +38,7 @@ data/vouchers.json  voucher data (see below)
 
 ## Voucher data
 
-All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or JavaScript. See `SPEC.md` (section 8) for every field. A voucher is shown only when `published` is `true`, all required fields are present, and its `expirationDate` has not passed (valid through the end of that day, Israel time). Expired records stay in the file. Fictional vouchers must set `"isDemo": true` and are labeled "דוגמה" on the site.
+All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or JavaScript. See `SPEC.md` (section 8) for every field. A voucher is shown only when `published` is `true`, all required fields are present, and its `expirationDate` has not passed (valid through the end of that day, Israel time). Expired records stay in the file. Optional `quantity` (a positive whole number) is shown as "כמות שוברים: N" below the price; it is informational only, not live stock. In a future Google Sheets import, the column "כמות שוברים" maps to `quantity`. Fictional vouchers must set `"isDemo": true` and are labeled "דוגמה" on the site.
 
 ## Category filter
 

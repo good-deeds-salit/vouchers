@@ -155,6 +155,7 @@ Voucher data lives in `data/vouchers.json`, separate from HTML, and is rendered 
 | `offer` | string | yes | Hebrew voucher offer text. |
 | `voucherValue` | number | yes | **Approved.** The amount the customer can redeem, in ILS. Never struck through. |
 | `discountedPrice` | number | yes | **Approved name** (replaces the earlier draft name `price`). The price the customer pays at the charity booth, in ILS. |
+| `quantity` | number | no | **Optional, informational only.** Whole number of vouchers offered, shown as "כמות שוברים: N" below the price on the card and in the modal. Hidden when missing or not a positive whole number. Not live inventory: it is never reduced, and there is no stock management or sold-out behavior. |
 | `originalValue` | number | no | **Optional.** A genuine regular price, in ILS, when applicable. The only value ever struck through. |
 | `description` | string | yes | Full business description (modal), stored and shown verbatim. A line break (`
 `) separates paragraphs; the modal renders each as its own paragraph. |
@@ -201,6 +202,7 @@ A voucher is shown publicly only if `published` is `true` **and** it is not expi
 | `category` | קולינריה (no secondary categories; no review needed) |
 | `voucherValue` | 100 |
 | `discountedPrice` | 50 |
+| `quantity` | 3 |
 | `originalValue` | not specified (field omitted) |
 | `expirationDate` | 2027-02-28 (displayed 28.02.2027) |
 | `website` | https://www.aviprivatechef.com |
@@ -315,6 +317,7 @@ The initial architecture stays compatible with, but does not implement:
 - Publishing only approved vouchers and images (hence `published`).
 - Using optimized local website images instead of direct Google Drive image links.
 - Future Google Sheets integration for business and voucher data. Business IDs and voucher IDs are distinct identifiers, and the import must support multiple vouchers belonging to the same business.
+- Google Sheets column **"כמות שוברים"** maps to the `quantity` field (informational number only).
 - AI-assisted category inference during import (offline only, never on the public site).
 
 Compatibility for now: stable `businessId`, `published` flag, `schemaVersion`, path-based image fields fillable by an import script, and no assumption of a fixed category list. A future `driveFileIds` field may be added later with approval; not now.
