@@ -1,4 +1,5 @@
-/* Voucher details modal: centered dialog on desktop, near full-screen bottom sheet on mobile. */
+/* Voucher details modal: centered dialog on desktop, near full-screen bottom sheet on mobile.
+   Only .voucher-dialog__scroll scrolls; the footer (expiration, phone, buttons) stays anchored inside the dialog. */
 body.modal-open {
   overflow: hidden;
 }
@@ -11,8 +12,12 @@ body.modal-open {
   border-radius: 1.25rem;
   background: var(--cream);
   color: var(--ink);
-  overflow-y: auto; /* the single scroll area */
-  overscroll-behavior: contain;
+  overflow: hidden; /* scrolling happens in .voucher-dialog__scroll */
+}
+
+.voucher-dialog[open] {
+  display: flex;
+  flex-direction: column;
 }
 
 .voucher-dialog::backdrop {
@@ -36,8 +41,12 @@ body.modal-open {
   }
 }
 
-.voucher-dialog__panel {
+.voucher-dialog__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 0 var(--space-4) var(--space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 /* Always-visible close button, kept in view while the content scrolls. */
@@ -191,11 +200,12 @@ body.modal-open {
   color: #cfc4a8;
 }
 
+/* The photo keeps its original proportions (never cropped or stretched). */
 .voucher-dialog__photo {
+  display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: auto;
   border-radius: var(--radius);
-  object-fit: cover;
   background: var(--cream-deep);
 }
 
@@ -207,23 +217,41 @@ body.modal-open {
   margin-top: var(--space-3);
 }
 
-.voucher-dialog__details {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-2) var(--space-4);
-  margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid rgba(201, 162, 74, 0.5);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.5);
+/* Fixed footer: solid background so scrolling content never shows through; safe-area aware. */
+.voucher-dialog__footer {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4) max(var(--space-2), env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(201, 162, 74, 0.6);
+  background: #fdfaf1;
+  box-shadow: 0 -4px 10px rgba(43, 45, 50, 0.1);
 }
 
-.voucher-dialog__details dt {
+.voucher-dialog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--space-4);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.voucher-dialog__meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.voucher-dialog__meta dt {
   font-weight: 700;
   color: var(--gold-dark);
 }
 
-.voucher-dialog__details dd {
+.voucher-dialog__meta dd {
   margin: 0;
 }
 
@@ -255,7 +283,23 @@ body.modal-open {
 .voucher-dialog__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2) var(--space-3);
+  gap: var(--space-2);
+}
+
+/* Compact buttons in the footer: side by side on phones; the longer WhatsApp label gets more room. */
+.voucher-dialog__actions .action-button {
+  padding-block: var(--space-1);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.voucher-dialog__actions .action-button--site {
+  flex: 1 1 6rem;
+}
+
+.voucher-dialog__actions .action-button--whatsapp {
+  flex: 2 1 10rem;
 }
 
 .action-button {

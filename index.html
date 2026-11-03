@@ -98,14 +98,16 @@
     </aside>
   </main>
 
-  <!-- Voucher details modal; its content is filled in by js/modal.js. -->
+  <!-- Voucher details modal; its content and fixed footer are filled in by js/modal.js. -->
   <dialog id="voucher-dialog" class="voucher-dialog" aria-labelledby="voucher-dialog-title">
-    <div class="voucher-dialog__panel">
+    <div class="voucher-dialog__scroll">
       <button type="button" class="voucher-dialog__close" aria-label="סגירה" autofocus>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
       </button>
       <div id="voucher-dialog-body"></div>
     </div>
+    <!-- Anchored inside the modal: expiration, phone and action buttons stay visible while the content scrolls. -->
+    <div id="voucher-dialog-footer" class="voucher-dialog__footer"></div>
   </dialog>
 </body>
 </html>

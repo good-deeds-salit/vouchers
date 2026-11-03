@@ -16,6 +16,8 @@ const ICONS = {
 
 let dialog;
 let body;
+let footer;
+let scrollArea;
 let lastTrigger = null;
 
 function externalLink(className, href, iconPath, label) {
@@ -70,9 +72,12 @@ function buildDescription(voucher) {
   return wrapper;
 }
 
-function buildDetails(voucher) {
-  const list = el("dl", "voucher-dialog__details");
-  list.append(el("dt", "", "בתוקף עד"), el("dd", "", formatDate(voucher.expirationDate)));
+// Compact expiration and phone row for the fixed footer. Missing fields are simply omitted.
+function buildMeta(voucher) {
+  const list = el("dl", "voucher-dialog__meta");
+  const expiry = el("div", "voucher-dialog__meta-item");
+  expiry.append(el("dt", "", "בתוקף עד"), el("dd", "", formatDate(voucher.expirationDate)));
+  list.append(expiry);
   if (voucher.phone) {
     const phone = el("a", "voucher-dialog__phone");
     phone.href = phoneHref(voucher.phone);
@@ -80,7 +85,9 @@ function buildDetails(voucher) {
     phone.append(icon(ICONS.phone), el("span", "", voucher.phone));
     const value = el("dd");
     value.append(phone);
-    list.append(el("dt", "", "טלפון"), value);
+    const item = el("div", "voucher-dialog__meta-item");
+    item.append(el("dt", "visually-hidden", "טלפון"), value); // the phone icon labels it visually
+    list.append(item);
   }
   return list;
 }
@@ -115,17 +122,17 @@ function buildActions(voucher) {
 
 export function openVoucher(voucher, trigger) {
   lastTrigger = trigger ?? null;
+  // Scrolling content: name, offer, full description, then the photo (after the text).
   const parts = [
     buildHeader(voucher),
     buildOffer(voucher),
-    buildPhoto(voucher),
     buildDescription(voucher),
-    buildDetails(voucher),
+    buildPhoto(voucher),
     buildTerms(voucher),
-    buildActions(voucher),
   ].filter(Boolean);
   body.replaceChildren(...parts);
-  dialog.scrollTop = 0;
+  footer.replaceChildren(...[buildMeta(voucher), buildActions(voucher)].filter(Boolean));
+  scrollArea.scrollTop = 0;
   document.body.classList.add("modal-open");
   dialog.showModal();
 }
@@ -133,6 +140,8 @@ export function openVoucher(voucher, trigger) {
 export function initModal() {
   dialog = document.getElementById("voucher-dialog");
   body = document.getElementById("voucher-dialog-body");
+  footer = document.getElementById("voucher-dialog-footer");
+  scrollArea = dialog.querySelector(".voucher-dialog__scroll");
 
   dialog.querySelector(".voucher-dialog__close").addEventListener("click", () => dialog.close());
 
