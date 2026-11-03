@@ -253,6 +253,7 @@ Rules for using them:
   - Suggest a new broad, intuitive category only when needed (e.g. yoga → "גוף ונפש" or another suitable broad category). Avoid duplicates and overly specific categories.
   - Starting examples: קולינריה, גוף ונפש, השכלה, טכנולוגיה, עסקים, סדנאות ופנאי.
   - Ambiguous cases get `categoryReview.needsReview = true` and are reported for manual review.
+- The filter is shown even when only one category exists ("הכול" plus that category) and hidden when there are no categories. Selecting the already active option does not re-render the cards.
 - Filter controls are keyboard accessible, expose the active state (`aria-pressed`), and show a Hebrew empty-state message if nothing matches.
 - **No live AI calls or live AI classification on the public website.** Categories are fixed in the data at authoring/import time.
 
@@ -284,7 +285,7 @@ Rules:
 good-deeds-vouchers/
 ├─ index.html
 ├─ css/        (base, layout, bunting, voucher, modal styles)
-├─ js/         (data loading, rendering, modal, share, later: filter)
+├─ js/         (data loading, rendering, modal, share, filter)
 ├─ data/vouchers.json
 ├─ assets/images/   (web-ready images incl. og-preview image)
 ├─ לוגו אבי שף הבית.png      (user's original, untouched)
