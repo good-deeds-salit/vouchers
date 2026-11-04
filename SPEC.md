@@ -265,6 +265,18 @@ Rules for using them:
 - Filter controls are keyboard accessible, expose the active state (`aria-pressed`), and show a Hebrew empty-state message if nothing matches.
 - **No live AI calls or live AI classification on the public website.** Categories are fixed in the data at authoring/import time.
 
+## 9.1 Event countdown and donation totals
+
+**Countdown** (in the header, below the gold heart divider and above the date/time/location row; no heading):
+- Counts down to **27.11.2026, 15:00 Israel time** (`Asia/Jerusalem`) and shows days, hours, minutes and seconds (`ימים`, `שעות`, `דקות`, `שניות`) in one row inside an elegant cream-and-gold frame with large numbers. Visual order, left to right, on every screen size: days, hours, minutes, seconds. The start instant is derived from the Israel wall-clock time with `Intl`, so daylight saving time is never hard-coded. It updates every second while the page is open.
+- Seconds round up, so values are never negative. When the time is reached the whole countdown is replaced by: **היריד התחיל! מחכים לכם ברחבת המועדון ❤️**
+
+**Totals** (directly above the category filter, two counters side by side, no heading):
+- **עסקים שתרמו ❤️** = number of unique `businessId` values among the eligible vouchers.
+- **שוברים שנתרמו 🎁** = sum of `quantity` across the eligible vouchers (a voucher with `quantity: 3` adds 3). A voucher without a valid `quantity` adds 0 to this total (its business is still counted).
+- "Eligible" means the same list the site shows (published, valid, not expired). Totals are computed from the data, never hard-coded, and do not change with the category filter. The section is hidden when there are no eligible vouchers.
+- Numbers count up from 0 once, when the section is first fully in view and the page is visible (a fixed duration of about 1 second regardless of the totals, with values computed from the animation progress and ease-in-out so small totals still step visibly, plus a brief settle pulse at the end). The animation clock starts on the first painted frame, so a hidden or throttled page never skips to the end. With `prefers-reduced-motion` the final values show immediately.
+
 ## 10. Website WhatsApp sharing and Open Graph
 
 - A visible site-level button **"שתפו בוואטסאפ"** opens WhatsApp (`https://wa.me/?text=...`, URL-encoded) with a prepared Hebrew message plus the actual website URL (taken from the page at click time, so no URL is invented). The message wording is proposed at implementation and approved by the user. This button only shares the website; it is unrelated to business WhatsApp group links.

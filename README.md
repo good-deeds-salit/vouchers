@@ -29,8 +29,8 @@ Alternative, if Node.js is installed: `npx serve .` (this one may cache files; p
 
 ```
 index.html          page
-css/                base, header, layout, filter, voucher, modal and banner styles
-js/                 main.js, data.js, filter.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
+css/                base, header, layout, counters, filter, voucher, modal and banner styles
+js/                 main.js, data.js, filter.js, countdown.js, stats.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
 assets/             garland and ribbon SVGs, images/ (optimized web images)
 tools/              dev_server.py (local no-cache development server)
 data/vouchers.json  voucher data (see below)
@@ -39,6 +39,11 @@ data/vouchers.json  voucher data (see below)
 ## Voucher data
 
 All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or JavaScript. See `SPEC.md` (section 8) for every field. A voucher is shown only when `published` is `true`, all required fields are present, and its `expirationDate` has not passed (valid through the end of that day, Israel time). Expired records stay in the file. Optional `quantity` (a positive whole number) is shown as "כמות שוברים: N" below the price; it is informational only, not live stock. In a future Google Sheets import, the column "כמות שוברים" maps to `quantity`. Fictional vouchers must set `"isDemo": true` and are labeled "דוגמה" on the site.
+
+## Countdown and donation totals
+
+- The countdown in the header (`js/countdown.js`) counts days, hours, minutes and seconds to the fair start, 27.11.2026 at 15:00 Israel time. To change the date or time, edit `FAIR_START` at the top of that file (use Israel wall-clock time; daylight saving is handled automatically). After the start it shows "היריד התחיל! מחכים לכם ברחבת המועדון ❤️".
+- The two totals above the filter (`js/stats.js`) are calculated from the eligible vouchers: unique `businessId` values, and the sum of `quantity` (a voucher without `quantity` adds 0). They ignore the category filter, count up once when first visible, and show final values immediately with reduced motion.
 
 ## Category filter
 
