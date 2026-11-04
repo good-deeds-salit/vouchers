@@ -265,6 +265,13 @@ Rules for using them:
 - Filter controls are keyboard accessible, expose the active state (`aria-pressed`), and show a Hebrew empty-state message if nothing matches.
 - **No live AI calls or live AI classification on the public website.** Categories are fixed in the data at authoring/import time.
 
+## 9.0 Business-name search
+
+- A search field with the placeholder **חפש לפי שם העסק** sits directly above the category filter. It filters as the visitor types (no Enter), matches **business names only**, supports partial matches, and ignores case, Hebrew points and extra spaces around or inside the query. A clear (X) button appears when the field has text (Escape also clears it).
+- Search and category apply **together**: a voucher is shown only if it matches the selected category **and** its business name matches the query. Changing the category keeps the query, and clearing the query keeps the category.
+- When nothing matches the query, the message **לא נמצאו שוברים התואמים לחיפוש** is shown. With no eligible vouchers at all, the field is hidden and the existing "אין כרגע שוברים להצגה." message remains.
+- The search never changes the countdown or the donation totals, which always use all eligible vouchers.
+
 ## 9.1 Event countdown and donation totals
 
 **Countdown** (in the header, below the gold heart divider and above the date/time/location row; no heading):
