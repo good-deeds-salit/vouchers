@@ -4,11 +4,15 @@ import { renderVouchers, renderLoadError } from "./render.js";
 import { initModal, openVoucher } from "./modal.js";
 import { initScrollReveal } from "./reveal.js";
 import { initCategoryFilter, matchesCategory } from "./filter.js";
+import { initCountdown } from "./countdown.js";
+import { initStats } from "./stats.js";
 
 initShareButton(document.getElementById("share-button"));
+initCountdown(document.getElementById("countdown"));
 
 const grid = document.getElementById("voucher-grid");
 const filterNav = document.getElementById("category-filter");
+const statsSection = document.getElementById("stats");
 
 initModal();
 
@@ -24,11 +28,13 @@ async function init() {
       stopReveal = initScrollReveal(renderVouchers(grid, matching, openVoucher, emptyMessage));
     };
 
+    initStats(statsSection, vouchers); // totals use all eligible vouchers, independent of the filter
     show(null);
     initCategoryFilter(filterNav, vouchers, show);
   } catch (error) {
     console.error(error);
     filterNav.hidden = true;
+    statsSection.hidden = true;
     renderLoadError(grid);
   }
 }
