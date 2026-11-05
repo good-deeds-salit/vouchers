@@ -64,6 +64,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
+  gap: var(--space-2);
   margin-bottom: var(--space-3);
 }
 
@@ -71,25 +72,40 @@
   display: none;
 }
 
+/* One compact rounded card per counter, equal in size, with a subtle gold border. */
 .stats__item {
   flex: 1 1 0;
-  max-width: 14rem;
-  padding-inline: var(--space-3);
+  max-width: 13rem;
+  padding: 0.4rem var(--space-2) 0.45rem;
+  border: 1.5px solid rgba(165, 129, 46, 0.55);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.6);
   text-align: center;
 }
 
-.stats__item + .stats__item {
-  border-inline-start: 1px solid rgba(165, 129, 46, 0.5);
-}
-
+/* Big solid dark-gold digits (no outline, no frame or badge around the number). */
 .stats__number {
   display: block;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--gold-dark);
+  font-size: 3.25rem;
+  font-weight: 800;
+  line-height: 1.05;
+  color: #a67c1a;
   font-variant-numeric: tabular-nums;
   transition: color 0.4s ease, opacity 0.4s ease;
+}
+
+/* Long totals get smaller digits so they still fit a narrow card: 1,000+ (5 characters), 10,000+ and 100,000+. */
+.stats__number[data-digits="5"] {
+  font-size: 2.6rem;
+}
+
+.stats__number[data-digits="6"] {
+  font-size: 2.1rem;
+}
+
+.stats__number[data-digits="7"],
+.stats__number[data-digits="8"] {
+  font-size: 1.7rem;
 }
 
 .stats__label {
@@ -106,7 +122,7 @@
 }
 
 .stats--counting .stats__number {
-  color: #b8902f;
+  color: #bb922a;
 }
 
 .stats--done .stats__number {
@@ -137,7 +153,7 @@
   }
 
   .stats__number {
-    font-size: 1.9rem;
+    font-size: 3.5rem;
   }
 
   .stats__label {

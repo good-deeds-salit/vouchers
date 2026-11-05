@@ -46,6 +46,7 @@ export function initStats(container, vouchers) {
   for (const numberEl of numbers) {
     const final = formatNumber(totals[numberEl.dataset.stat]);
     numberEl.textContent = final;
+    numberEl.dataset.digits = String(final.length); // lets the CSS shrink very large totals so they stay inside the card
     numberEl.parentElement.querySelector(".visually-hidden").textContent = final;
   }
   container.hidden = false;
