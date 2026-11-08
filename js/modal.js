@@ -35,8 +35,6 @@ function buildHeader(voucher) {
     const logo = el("img", "voucher-dialog__logo");
     logo.src = voucher.logo;
     logo.alt = `לוגו ${voucher.businessName}`;
-    logo.width = 64;
-    logo.height = 64;
     logo.addEventListener("error", () => logo.remove());
     header.append(logo);
   }
@@ -63,13 +61,30 @@ function buildPhoto(voucher) {
   return photo;
 }
 
-// The description keeps its paragraphs: each line break in the data becomes its own <p>.
-function buildDescription(voucher) {
-  const wrapper = el("div", "voucher-dialog__description");
-  for (const paragraph of voucher.description.split(/\r?\n/)) {
+// Splits text on line breaks into paragraphs (blank lines are dropped).
+function appendParagraphs(wrapper, text) {
+  for (const paragraph of text.split(/\r?\n/)) {
     if (paragraph.trim() !== "") wrapper.append(el("p", "", paragraph));
   }
+}
+
+// Optional extra information about the offer itself. Not rendered at all when the data has none.
+function buildOfferDetails(voucher) {
+  if (!voucher.offerDetails || voucher.offerDetails.trim() === "") return null;
+  const wrapper = el("div", "voucher-dialog__offer-details");
+  appendParagraphs(wrapper, voucher.offerDetails);
   return wrapper;
+}
+
+// Prominent, automatically generated heading ("על <business name>") followed by the original business description,
+// whose paragraphs are kept: each line break in the data becomes its own <p>.
+function buildAbout(voucher) {
+  const section = el("section", "voucher-dialog__about");
+  const heading = el("h3", "voucher-dialog__about-title", `על ${voucher.businessName}`);
+  const description = el("div", "voucher-dialog__description");
+  appendParagraphs(description, voucher.description);
+  section.append(heading, description);
+  return section;
 }
 
 // Compact expiration and phone row for the fixed footer. Missing fields are simply omitted.
@@ -99,6 +114,14 @@ function buildTerms(voucher) {
   return section;
 }
 
+// Redemption location: a bold label on its own line, the place on the next line.
+function buildLocation(voucher) {
+  if (!voucher.redemptionLocation || voucher.redemptionLocation.trim() === "") return null;
+  const section = el("section", "voucher-dialog__location");
+  section.append(el("strong", "voucher-dialog__location-label", "מקום המימוש"), el("p", "", voucher.redemptionLocation));
+  return section;
+}
+
 function buildActions(voucher) {
   const actions = [];
   if (isValidWebsiteUrl(voucher.website)) {
@@ -122,13 +145,16 @@ function buildActions(voucher) {
 
 export function openVoucher(voucher, trigger) {
   lastTrigger = trigger ?? null;
-  // Scrolling content: name, offer, full description, then the photo (after the text).
+  // Scrolling content: name, offer, extra offer info, "About <business>" with its description,
+  // voucher terms, redemption location, and finally the photo (all text comes before the image).
   const parts = [
     buildHeader(voucher),
     buildOffer(voucher),
-    buildDescription(voucher),
-    buildPhoto(voucher),
+    buildOfferDetails(voucher),
+    buildAbout(voucher),
     buildTerms(voucher),
+    buildLocation(voucher),
+    buildPhoto(voucher),
   ].filter(Boolean);
   body.replaceChildren(...parts);
   footer.replaceChildren(...[buildMeta(voucher), buildActions(voucher)].filter(Boolean));

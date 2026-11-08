@@ -8,6 +8,10 @@
 /*.gif
 /*.heic
 
+# Private import material (form responses, source images, review reports): never committed.
+/import-review/
+/good_deeds_import_review_*/
+
 # Editor / OS files
 .DS_Store
 Thumbs.db

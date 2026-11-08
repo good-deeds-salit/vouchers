@@ -1,4 +1,5 @@
-// Business-name search: filters as the visitor types. Only business names are searched.
+// Voucher search: filters as the visitor types. Searches the business name, the offer text, the additional offer
+// information and the business description.
 
 // Lower-cases, drops Hebrew points (niqqud) and collapses whitespace, so matching ignores case and extra spaces.
 export function normalizeText(text) {
@@ -10,11 +11,13 @@ export function normalizeText(text) {
     .trim();
 }
 
-// An empty query matches every voucher; otherwise the business name must contain the query (partial match).
-export function matchesBusinessName(voucher, query) {
+const SEARCH_FIELDS = ["businessName", "offer", "offerDetails", "description"];
+
+// An empty query matches every voucher; otherwise any searched field must contain the query (partial match).
+export function matchesSearch(voucher, query) {
   const normalizedQuery = normalizeText(query);
   if (normalizedQuery === "") return true;
-  return normalizeText(voucher.businessName).includes(normalizedQuery);
+  return SEARCH_FIELDS.some((field) => normalizeText(voucher[field]).includes(normalizedQuery));
 }
 
 // Wires the search form. `onChange(query)` runs on every input change (no Enter needed) and after clearing.

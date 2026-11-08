@@ -102,7 +102,13 @@
 }
 
 /* B) What the buyer receives: the focal point */
+/* Long original offer texts are clamped on the card; the details modal always shows them in full. */
 .voucher-card__lead {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
   font-size: 0.78rem;
   text-wrap: balance;
   font-weight: 400;
@@ -228,4 +234,9 @@
   .voucher-card__price-amount {
     font-size: 1.75rem;
   }
+}
+
+/* Hyphenated words (e.g. a pop-up) never break across lines. */
+.nowrap {
+  white-space: nowrap;
 }
