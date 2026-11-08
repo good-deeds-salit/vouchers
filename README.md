@@ -30,7 +30,7 @@ Alternative, if Node.js is installed: `npx serve .` (this one may cache files; p
 ```
 index.html          page
 css/                base, header, layout, counters, search, filter, voucher, modal and banner styles
-js/                 main.js, data.js, filter.js, search.js, countdown.js, stats.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
+js/                 main.js, data.js, filter.js, search.js, shuffle.js, countdown.js, stats.js, render.js, modal.js, reveal.js, share.js, dom.js, format.js
 assets/             garland and ribbon SVGs, images/ (optimized web images)
 tools/              dev_server.py (local no-cache development server)
 data/vouchers.json  voucher data (see below)
@@ -44,6 +44,10 @@ All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or Java
 
 - The countdown in the header (`js/countdown.js`) counts days, hours, minutes and seconds to the fair start, 27.11.2026 at 15:00 Israel time. To change the date or time, edit `FAIR_START` at the top of that file (use Israel wall-clock time; daylight saving is handled automatically). After the start it shows "היריד התחיל! מחכים לכם ברחבת המועדון ❤️".
 - The two totals above the filter (`js/stats.js`) are calculated from the eligible vouchers: unique `businessId` values, and the sum of `quantity` (a voucher without `quantity` adds 0). They ignore the category filter, count up once when first visible, and show final values immediately with reduced motion.
+
+## Voucher order
+
+The cards are shown in a random order that is chosen once per page load (`js/shuffle.js`) and kept for the whole visit: search, category filters and the modal only take subsets of that same order, and "הכול" restores it. A business with several voucher types has its cards spread out among the others. Each voucher is one card whatever its `quantity`. `data/vouchers.json` is never reordered.
 
 ## Voucher search
 
