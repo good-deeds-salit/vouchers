@@ -267,6 +267,10 @@ Rules for using them:
 - Filter controls are keyboard accessible, expose the active state (`aria-pressed`), and show a Hebrew empty-state message if nothing matches.
 - **No live AI calls or live AI classification on the public website.** Categories are fixed in the data at authoring/import time.
 
+## 9.0 Voucher order
+
+- The eligible vouchers are shuffled **once per page load** (`js/shuffle.js`); the order stays fixed during the visit, so search, category filters and the modal preserve the relative order and "הכול" restores the same order. Cards of a business with several voucher types are spread out as evenly as practical. One card per voucher regardless of `quantity`. No shuffle button, animation or dependency; `data/vouchers.json` keeps its original order.
+
 ## 9.0 Voucher search
 
 - A search field with the placeholder **חפשו עסק, מוצר או שירות** sits directly above the category filter. It filters as the visitor types (no Enter), matches the **business name, the offer text (`offer`), `offerDetails` and the business `description`**, supports partial matches, and ignores case, Hebrew points and extra spaces around or inside the query. A clear (X) button appears when the field has text (Escape also clears it).

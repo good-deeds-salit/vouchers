@@ -7,6 +7,7 @@ import { initCategoryFilter, matchesCategory } from "./filter.js";
 import { initSearch, matchesSearch, normalizeText } from "./search.js";
 import { initCountdown } from "./countdown.js";
 import { initStats } from "./stats.js";
+import { shuffleVouchers } from "./shuffle.js";
 
 initShareButton(document.getElementById("share-button"));
 initCountdown(document.getElementById("countdown"));
@@ -24,7 +25,8 @@ initModal();
 
 async function init() {
   try {
-    const vouchers = getVisibleVouchers(await loadVouchers());
+    // Random order, fixed for this page load: filtering and search only take subsets of this same array.
+    const vouchers = shuffleVouchers(getVisibleVouchers(await loadVouchers()));
     // The category and the search query are kept together, so each one survives a change of the other.
     const state = { category: null, query: "" };
     let stopReveal = () => {};
