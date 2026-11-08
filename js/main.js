@@ -4,7 +4,7 @@ import { renderVouchers, renderLoadError } from "./render.js";
 import { initModal, openVoucher } from "./modal.js";
 import { initScrollReveal } from "./reveal.js";
 import { initCategoryFilter, matchesCategory } from "./filter.js";
-import { initSearch, matchesBusinessName, normalizeText } from "./search.js";
+import { initSearch, matchesSearch, normalizeText } from "./search.js";
 import { initCountdown } from "./countdown.js";
 import { initStats } from "./stats.js";
 
@@ -33,7 +33,7 @@ async function init() {
     // `animate` is true for category changes (cards reveal as before) and false while typing (no flicker).
     const show = ({ animate, quiet = false }) => {
       const matching = vouchers.filter(
-        (voucher) => matchesCategory(voucher, state.category) && matchesBusinessName(voucher, state.query),
+        (voucher) => matchesCategory(voucher, state.category) && matchesSearch(voucher, state.query),
       );
       const key = matching.map((voucher) => voucher.id).join("|");
       if (key === shownKey) return; // same result as already shown: leave the cards and animations alone

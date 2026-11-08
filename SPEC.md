@@ -170,6 +170,8 @@ Voucher data lives in `data/vouchers.json`, separate from HTML, and is rendered 
 | `website` | string | no | Full `https://` URL. |
 | `whatsappGroupUrl` | string | no | Valid WhatsApp link (`https://chat.whatsapp.com/...` or `https://wa.me/...`); button shown only if present and valid. |
 | `terms` | string | no | Section shown only if present. |
+| `offerDetails` | string | no | Additional information about the offer (the form's "מידע נוסף על השובר / ההטבה"), shown in the modal under the photo. Not rendered when missing or empty. |
+| `redemptionLocation` | string | no | Where the voucher can be redeemed. Shown in the modal after the terms, as a bold label "מקום המימוש:" on its own line with the location on the next line. Not rendered when missing. |
 | `published` | boolean | yes | Only `true` vouchers appear. |
 | `publishedAt` | string | no | ISO date, informational / for future import. |
 | `isDemo` | boolean | yes | `true` for fictional placeholder data. |
@@ -259,16 +261,16 @@ Rules for using them:
 - During development, and in future data imports, Claude infers categories from the business name, business description and voucher offer:
   - The category list is not fixed. Reuse an existing category whenever appropriate.
   - Suggest a new broad, intuitive category only when needed (e.g. yoga → "גוף ונפש" or another suitable broad category). Avoid duplicates and overly specific categories.
-  - Starting examples: קולינריה, גוף ונפש, השכלה, טכנולוגיה, עסקים, סדנאות ופנאי.
+  - Starting examples: קולינריה, גוף ונפש, השכלה, טכנולוגיה, לעסקים, סדנאות ופנאי.
   - Ambiguous cases get `categoryReview.needsReview = true` and are reported for manual review.
 - The filter is shown even when only one category exists ("הכול" plus that category) and hidden when there are no categories. Selecting the already active option does not re-render the cards.
 - Filter controls are keyboard accessible, expose the active state (`aria-pressed`), and show a Hebrew empty-state message if nothing matches.
 - **No live AI calls or live AI classification on the public website.** Categories are fixed in the data at authoring/import time.
 
-## 9.0 Business-name search
+## 9.0 Voucher search
 
-- A search field with the placeholder **חפש לפי שם העסק** sits directly above the category filter. It filters as the visitor types (no Enter), matches **business names only**, supports partial matches, and ignores case, Hebrew points and extra spaces around or inside the query. A clear (X) button appears when the field has text (Escape also clears it).
-- Search and category apply **together**: a voucher is shown only if it matches the selected category **and** its business name matches the query. Changing the category keeps the query, and clearing the query keeps the category.
+- A search field with the placeholder **חפשו עסק, מוצר או שירות** sits directly above the category filter. It filters as the visitor types (no Enter), matches the **business name, the offer text (`offer`), `offerDetails` and the business `description`**, supports partial matches, and ignores case, Hebrew points and extra spaces around or inside the query. A clear (X) button appears when the field has text (Escape also clears it).
+- Search and category apply **together**: a voucher is shown only if it matches the selected category **and** any of those fields matches the query. Changing the category keeps the query, and clearing the query keeps the category.
 - When nothing matches the query, the message **לא נמצאו שוברים התואמים לחיפוש** is shown. With no eligible vouchers at all, the field is hidden and the existing "אין כרגע שוברים להצגה." message remains.
 - The search never changes the countdown or the donation totals, which always use all eligible vouchers.
 

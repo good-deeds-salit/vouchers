@@ -94,22 +94,29 @@ body.modal-open {
 
 .voucher-dialog__header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
   min-height: 2.75rem;
   padding-inline-end: 3.5rem; /* keeps logo and title clear of the close button (left in RTL) */
 }
 
+/* The logo keeps its own proportions: square logos stay 4rem, wide logos get more width (up to 10rem) and wrap
+   the title below when the row is too narrow, so logo text stays readable. */
 .voucher-dialog__logo {
   flex: none;
-  width: 4rem;
-  height: 4rem;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 10rem);
+  max-height: 4rem;
   border-radius: 0.9rem;
   object-fit: contain;
   background: #fff;
 }
 
 .voucher-dialog__title {
+  flex: 1 1 8rem;
+  min-width: 0;
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.2;
@@ -213,8 +220,39 @@ body.modal-open {
   line-height: 1.65;
 }
 
-.voucher-dialog__description p + p {
+.voucher-dialog__description p + p,
+.voucher-dialog__offer-details p + p {
   margin-top: var(--space-3);
+}
+
+/* Extra information about the offer, directly under the photo. */
+.voucher-dialog__offer-details {
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+/* "About <business>" heading: the clear start of the business section. */
+.voucher-dialog__about-title {
+  margin: 0 0 var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(201, 162, 74, 0.6);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--gold-dark);
+  overflow-wrap: anywhere;
+}
+
+/* Redemption location: bold label on its own line, the place below it. */
+.voucher-dialog__location-label {
+  display: block;
+  font-size: 1rem;
+  color: var(--gold-dark);
+}
+
+.voucher-dialog__location p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
 }
 
 /* Fixed footer: solid background so scrolling content never shows through; safe-area aware. */

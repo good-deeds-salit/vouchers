@@ -45,9 +45,9 @@ All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or Java
 - The countdown in the header (`js/countdown.js`) counts days, hours, minutes and seconds to the fair start, 27.11.2026 at 15:00 Israel time. To change the date or time, edit `FAIR_START` at the top of that file (use Israel wall-clock time; daylight saving is handled automatically). After the start it shows "היריד התחיל! מחכים לכם ברחבת המועדון ❤️".
 - The two totals above the filter (`js/stats.js`) are calculated from the eligible vouchers: unique `businessId` values, and the sum of `quantity` (a voucher without `quantity` adds 0). They ignore the category filter, count up once when first visible, and show final values immediately with reduced motion.
 
-## Business search
+## Voucher search
 
-The search field above the category filter (`js/search.js`) filters the vouchers by business name as you type. It combines with the category filter (both must match), ignores case and extra spaces, and shows "לא נמצאו שוברים התואמים לחיפוש" when nothing matches. It only looks at `businessName`, and it never affects the countdown or the totals.
+The search field above the category filter (`js/search.js`) filters the vouchers as you type. It combines with the category filter (both must match), ignores case and extra spaces, and shows "לא נמצאו שוברים התואמים לחיפוש" when nothing matches. It searches `businessName`, `offer`, `offerDetails` and `description`, and it never affects the countdown or the totals.
 
 ## Category filter
 
