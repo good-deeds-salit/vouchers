@@ -85,6 +85,18 @@
   transition: color 0.2s ease;
 }
 
+/* The last word and the WhatsApp icon never separate when the line wraps. */
+.site-credit__end {
+  white-space: nowrap;
+}
+
+.site-credit__icon {
+  width: 1.05em;
+  height: 1.05em;
+  margin-inline-start: 0.3em;
+  vertical-align: -0.18em;
+}
+
 /* Hover and keyboard focus: a darker tone and a soft gold focus ring, never an underline. */
 .site-credit a:hover,
 .site-credit a:active {
