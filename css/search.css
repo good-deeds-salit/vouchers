@@ -2,6 +2,7 @@
 .search {
   position: relative;
   max-width: 26rem;
+  margin-inline: auto; /* centered in the page */
   margin-bottom: var(--space-3);
 }
 
