@@ -81,6 +81,7 @@
   color: var(--gold-dark);
   text-align: center;
   text-decoration: none;
+  text-wrap: balance; /* when it wraps, split the line evenly instead of leaving one word alone */
   transition: color 0.2s ease;
 }
 
