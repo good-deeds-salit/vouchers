@@ -293,9 +293,9 @@ Rules for using them:
 ## 10. Website WhatsApp sharing and Open Graph
 
 - A visible site-level button **"שתפו בוואטסאפ"** opens WhatsApp (`https://wa.me/?text=...`, URL-encoded) with a prepared Hebrew message plus the actual website URL (taken from the page at click time, so no URL is invented). The message wording is proposed at implementation and approved by the user. This button only shares the website; it is unrelated to business WhatsApp group links.
-- Open Graph metadata is supported: `og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:locale` (`he_IL`).
-- Plan a dedicated **1200×630** social preview image, stored locally in the project (e.g. `assets/images/og-preview.png`), featuring: the website title, the subtitle "כל ההכנסות לתרומה", festive bunting, the fair date and location, and the same visual identity as the site.
-- `og:url` and the absolute `og:image` URL (required by most crawlers) are **not invented**: they remain clearly marked placeholders until GitHub Pages is deployed, then are set to the real URL.
+- Open Graph and Twitter Card metadata (`summary_large_image`) are set in `index.html`: `og:title`, `og:description`, `og:image` (+ type, width, height, alt), `og:url`, `og:type`, `og:locale` (`he_IL`), `og:site_name`, and a canonical link.
+- Plan a dedicated **1200×630** social preview image, stored locally in the project (`assets/images/og-preview.jpg`, 1200×630, ~130 KB), featuring: the website title, the subtitle "כל ההכנסות לתרומה", festive bunting, the fair date and location, and the same visual identity as the site.
+- `og:url`, `og:image` and the canonical link use the absolute public URL `https://good-deeds-salit.github.io/vouchers/` (required by most crawlers).
 
 ## 11. Git workflow (training project)
 
