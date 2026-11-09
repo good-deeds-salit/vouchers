@@ -5,7 +5,8 @@
   --ribbon-y: 0.95rem; /* horizontal ribbon in the top band, above all text */
   --ribbon-size: 1.1rem;
   position: relative;
-  display: block;
+  display: flex; /* the content fills the card, so the pricing group can sit at a common position */
+  flex-direction: column;
   min-width: 0;
   padding: 0;
   border: 0;
@@ -84,6 +85,7 @@
 .voucher-card__content {
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,14 +103,9 @@
   overflow-wrap: anywhere;
 }
 
-/* B) What the buyer receives: the focal point */
-/* Long original offer texts are clamped on the card; the details modal always shows them in full. */
+/* B) What the buyer receives: the focal point. Long texts are shown in full; the pricing group below is pushed to
+   the bottom of the card (margin-top: auto), so it starts at the same height in every card of a row. */
 .voucher-card__lead {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
-  overflow: hidden;
   font-size: 0.78rem;
   text-wrap: balance;
   font-weight: 400;
@@ -123,6 +120,15 @@
   line-height: 1.05;
   color: #f4e0b0; /* warm champagne */
   white-space: nowrap;
+}
+
+/* The pricing group: value, price and quantity, kept together at the bottom of the card. */
+.voucher-card__pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 0.25rem;
 }
 
 /* C) What the buyer pays: clear, but secondary */

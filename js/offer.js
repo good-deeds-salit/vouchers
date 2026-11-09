@@ -35,13 +35,15 @@ export function splitOffer(offerText) {
 // `prefix` is the BEM block name of the caller (e.g. "voucher-card").
 export function createOfferBlock(voucher, prefix) {
   const { lead, tail } = splitOffer(voucher.offer);
+  // The offer text (top) and the pricing group (value, price, quantity) are separate blocks, so the pricing group can
+  // be aligned at the same position across cards however long the text above it is.
   const nodes = [];
-
   if (lead) nodes.push(leadNode(lead, `${prefix}__lead`));
+  const group = [];
   // An offer without its own amount (the original submitted wording) gets a small label so the value reads clearly.
-  if (!AMOUNT.test(voucher.offer)) nodes.push(el("span", `${prefix}__lead`, "בשווי"));
-  nodes.push(el("strong", `${prefix}__value`, formatShekel(voucher.voucherValue)));
-  if (tail) nodes.push(el("span", `${prefix}__lead`, tail));
+  if (!AMOUNT.test(voucher.offer)) group.push(el("span", `${prefix}__lead`, "בשווי"));
+  group.push(el("strong", `${prefix}__value`, formatShekel(voucher.voucherValue)));
+  if (tail) group.push(el("span", `${prefix}__lead`, tail));
 
   // What the buyer pays. Only a genuine originalValue is ever struck through.
   const price = el("span", `${prefix}__price`);
@@ -51,19 +53,21 @@ export function createOfferBlock(voucher, prefix) {
     el("span", `${prefix}__price-suffix`, "בלבד"),
   );
   price.append(el("span", `${prefix}__price-label`, "מחיר השובר:"), line);
-  nodes.push(price);
+  group.push(price);
 
   // Informational only (not live stock): shown when quantity is a positive whole number.
   if (Number.isInteger(voucher.quantity) && voucher.quantity > 0) {
     const quantity = el("span", `${prefix}__quantity`, "כמות שוברים: ");
     quantity.append(el("bdi", "", String(voucher.quantity)));
-    nodes.push(quantity);
+    group.push(quantity);
   }
 
   if (typeof voucher.originalValue === "number") {
     const original = el("span", `${prefix}__original`);
     original.append("מחיר רגיל: ", el("del", "", formatShekel(voucher.originalValue)));
-    nodes.push(original);
+    group.push(original);
   }
+  nodes.push(el("span", `${prefix}__pricing`));
+  nodes.at(-1).append(...group);
   return nodes;
 }
