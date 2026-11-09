@@ -61,6 +61,6 @@ The filter above the voucher grid is generated in the browser from the `category
 
 Original business images (Hebrew filenames) are kept locally and ignored by Git. The website uses the optimized, ASCII-named copies in `assets/images/` (named after the business ID, e.g. `b-001-logo.png`).
 
-## Open Graph placeholders
+## Social sharing
 
-`index.html` contains placeholder `og:url` and `og:image` values. Replace them with the real URLs after GitHub Pages is deployed, and add the 1200×630 preview image.
+`index.html` carries Open Graph and Twitter Card metadata that points to `https://good-deeds-salit.github.io/vouchers/` and to the 1200×630 preview image `assets/images/og-preview.jpg`. If the site moves to another URL, update `og:url`, `og:image`, `twitter:image` and the canonical link.
