@@ -246,3 +246,8 @@
 .nowrap {
   white-space: nowrap;
 }
+
+/* One line of an offer that is written with explicit line breaks. */
+.offer-line {
+  display: block;
+}
