@@ -152,7 +152,7 @@ Voucher data lives in `data/vouchers.json`, separate from HTML, and is rendered 
 | `id` | string | yes | Unique voucher ID, e.g. `v-001`. Never reused. |
 | `businessId` | string | yes | Stable business ID, e.g. `b-001`. A business may have several vouchers. Future image matching keys off this. |
 | `businessName` | string | yes | Hebrew. |
-| `offer` | string | yes | Hebrew voucher offer text. |
+| `offer` | string | yes | Hebrew voucher offer text. A line break (`\n`) in the text is shown as a line break on the card and in the modal (used for offers that must read on fixed lines); without one the text wraps normally. |
 | `voucherValue` | number | yes | **Approved.** The amount the customer can redeem, in ILS. Never struck through. |
 | `discountedPrice` | number | yes | **Approved name** (replaces the earlier draft name `price`). The price the customer pays at the charity booth, in ILS. |
 | `quantity` | number | no | **Optional, informational only.** Whole number of vouchers offered, shown as "כמות שוברים: N" below the price on the card and in the modal. Hidden when missing or not a positive whole number. Not live inventory: it is never reduced, and there is no stock management or sold-out behavior. |

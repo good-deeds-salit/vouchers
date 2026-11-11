@@ -8,8 +8,7 @@ const AMOUNT = /\d[\d,.]*\s?(?:₪|ש["״]ח)/; // the shekel amount written ins
 // The lead text; a hyphenated word such as "פופ-אפ" is wrapped in a non-wrapping span so it never splits across lines.
 // The visible text is unchanged and wrapping stays normal everywhere else.
 const HYPHENATED = /[\p{L}\d]+-[\p{L}\d]+/gu;
-function leadNode(text, className) {
-  const node = el("span", className);
+function appendWithNoBreakHyphens(node, text) {
   let last = 0;
   for (const match of text.matchAll(HYPHENATED)) {
     if (match.index > last) node.append(text.slice(last, match.index));
@@ -17,6 +16,22 @@ function leadNode(text, className) {
     last = match.index + match[0].length;
   }
   if (last < text.length) node.append(text.slice(last));
+}
+
+// An offer written with explicit line breaks (a line break in the data) is shown with each line on its own line, on the card and
+// in the modal. Offers without a line break wrap normally, exactly as before.
+function leadNode(text, className) {
+  const node = el("span", className);
+  const lines = text.split(/\r?\n/).map((line) => line.trim()).filter((line) => line !== "");
+  if (lines.length < 2) {
+    appendWithNoBreakHyphens(node, text);
+    return node;
+  }
+  for (const line of lines) {
+    const row = el("span", "offer-line");
+    appendWithNoBreakHyphens(row, line);
+    node.append(row);
+  }
   return node;
 }
 
