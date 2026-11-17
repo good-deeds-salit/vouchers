@@ -131,6 +131,10 @@ body.modal-open {
   overflow-wrap: anywhere;
 }
 
+.voucher-dialog__title .offer-line:not(:first-child) {
+  font-weight: 400;
+}
+
 /* Offer summary: centered; the value received is the focal point, the price paid is secondary. */
 .voucher-dialog__offer {
   display: flex;

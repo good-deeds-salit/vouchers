@@ -103,6 +103,11 @@
   overflow-wrap: anywhere;
 }
 
+/* A name written on two lines (e.g. business / profession): the second line is regular weight. */
+.voucher-card__name .offer-line:not(:first-child) {
+  font-weight: 400;
+}
+
 /* B) What the buyer receives: the focal point. Long texts are shown in full; the pricing group below is pushed to
    the bottom of the card (margin-top: auto), so it starts at the same height in every card of a row. */
 .voucher-card__lead {

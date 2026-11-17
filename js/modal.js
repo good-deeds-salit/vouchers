@@ -1,6 +1,6 @@
 // Accessible voucher details modal built on the native <dialog> element.
 // showModal() makes the page behind inert, traps focus and closes on Escape.
-import { el, icon } from "./dom.js";
+import { el, icon, nameElement, plainName } from "./dom.js";
 import { formatDate, phoneHref } from "./format.js";
 import { createOfferBlock } from "./offer.js";
 import { isValidWhatsAppUrl, isValidWebsiteUrl } from "./data.js";
@@ -34,11 +34,11 @@ function buildHeader(voucher) {
   if (voucher.logo) {
     const logo = el("img", "voucher-dialog__logo");
     logo.src = voucher.logo;
-    logo.alt = `לוגו ${voucher.businessName}`;
+    logo.alt = `לוגו ${plainName(voucher.businessName)}`;
     logo.addEventListener("error", () => logo.remove());
     header.append(logo);
   }
-  const title = el("h2", "voucher-dialog__title", voucher.businessName);
+  const title = nameElement("h2", "voucher-dialog__title", voucher.businessName);
   title.id = "voucher-dialog-title";
   header.append(title);
   if (voucher.isDemo) header.append(el("span", "demo-badge", "דוגמה"));
@@ -80,7 +80,7 @@ function buildOfferDetails(voucher) {
 // whose paragraphs are kept: each line break in the data becomes its own <p>.
 function buildAbout(voucher) {
   const section = el("section", "voucher-dialog__about");
-  const heading = el("h3", "voucher-dialog__about-title", `על ${voucher.businessName}`);
+  const heading = el("h3", "voucher-dialog__about-title", `על ${plainName(voucher.businessName)}`);
   const description = el("div", "voucher-dialog__description");
   appendParagraphs(description, voucher.description);
   section.append(heading, description);
