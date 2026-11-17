@@ -1,5 +1,5 @@
 // Builds the compact voucher previews from voucher data. Uses DOM APIs and textContent only.
-import { el } from "./dom.js";
+import { el, nameElement } from "./dom.js";
 import { createOfferBlock } from "./offer.js";
 
 export function createVoucherCard(voucher, onOpen) {
@@ -20,7 +20,7 @@ export function createVoucherCard(voucher, onOpen) {
   }
 
   const content = el("span", "voucher-card__content");
-  content.append(el("span", "voucher-card__name", voucher.businessName), ...createOfferBlock(voucher, "voucher-card"));
+  content.append(nameElement("span", "voucher-card__name", voucher.businessName), ...createOfferBlock(voucher, "voucher-card"));
   if (voucher.isDemo) content.append(el("span", "demo-badge", "דוגמה"));
 
   card.append(content);
