@@ -107,10 +107,18 @@ function buildMeta(voucher) {
   return list;
 }
 
+// Terms written on several lines (e.g. a timetable) keep each line on its own line; a single line is a plain paragraph.
 function buildTerms(voucher) {
   if (!voucher.terms) return null;
   const section = el("section", "voucher-dialog__terms");
-  section.append(el("h3", "", "תנאי השובר"), el("p", "", voucher.terms));
+  const lines = voucher.terms.split("\n").map((line) => line.trim()).filter((line) => line !== "");
+  const text = el("p", "");
+  if (lines.length < 2) {
+    text.textContent = voucher.terms;
+  } else {
+    for (const line of lines) text.append(el("span", "offer-line", line));
+  }
+  section.append(el("h3", "", "תנאי השובר"), text);
   return section;
 }
 
