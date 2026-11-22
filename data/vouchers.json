@@ -581,6 +581,24 @@
       "redemptionLocation": "בתיאום מול הצלם.",
       "published": true,
       "isDemo": false
+    },
+    {
+      "id": "v-030",
+      "businessId": "b-028",
+      "businessName": "המכון של סילביה",
+      "offer": "טיפול פיזיותרפי או מסאז'",
+      "voucherValue": 200,
+      "discountedPrice": 100,
+      "quantity": 1,
+      "description": "מכון פיזיותרפיה. ניסיון של עשרות שנים בטיפולים אורתופדיים, נוירולוגיים, פציעות ספורט, ילדים ופיברומיאלגיה.",
+      "category": "גוף ונפש",
+      "secondaryCategories": [],
+      "expirationDate": "2027-05-20",
+      "phone": "052-458-6364",
+      "terms": "בתיאום מראש.",
+      "redemptionLocation": "בסלעית, במכון הפיזיותרפיה.",
+      "published": true,
+      "isDemo": false
     }
   ]
 }
