@@ -561,6 +561,26 @@
       "redemptionLocation": "איסוף מהסטודיו בסלעית.",
       "published": true,
       "isDemo": false
+    },
+    {
+      "id": "v-029",
+      "businessId": "b-027",
+      "businessName": "Katz Photography",
+      "offer": "צילומי תדמית",
+      "voucherValue": 250,
+      "discountedPrice": 125,
+      "quantity": 2,
+      "description": "צילומי תדמית",
+      "logo": "assets/images/b-027-logo.jpg",
+      "category": "לעסקים",
+      "secondaryCategories": [],
+      "expirationDate": "2026-12-31",
+      "phone": "053-471-1351",
+      "website": "https://www.instagram.com/okatz_photography",
+      "terms": "בתיאום מראש.",
+      "redemptionLocation": "בתיאום מול הצלם.",
+      "published": true,
+      "isDemo": false
     }
   ]
 }
