@@ -282,7 +282,7 @@ Rules for using them:
 
 **Countdown** (in the header, below the gold heart divider and above the date/time/location row; no heading):
 - Counts down to **27.11.2026, 15:00 Israel time** (`Asia/Jerusalem`) and shows days, hours, minutes and seconds (`ימים`, `שעות`, `דקות`, `שניות`) in one row inside an elegant cream-and-gold frame with large numbers. Visual order, left to right, on every screen size: days, hours, minutes, seconds. The start instant is derived from the Israel wall-clock time with `Intl`, so daylight saving time is never hard-coded. It updates every second while the page is open.
-- Seconds round up, so values are never negative. When the time is reached the whole countdown is replaced by: **היריד התחיל! מחכים לכם ברחבת המועדון ❤️**
+- Seconds round up, so values are never negative. When the time is reached (**27.11.2026, 15:00 Israel time**) the **whole countdown element is removed** automatically, even if the page is already open: **no replacement text and no empty space** are left, and it stays removed on every later visit (the time decides; the browser also remembers it, so a wrong device clock cannot bring it back). The details row below simply follows the gold divider.
 
 **Totals** (directly above the category filter, two counters side by side, no heading):
 - **עסקים שתרמו ❤️** = number of unique `businessId` values among the eligible vouchers.

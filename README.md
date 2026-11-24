@@ -42,8 +42,12 @@ All vouchers live in `data/vouchers.json`; nothing is hard-coded in HTML or Java
 
 ## Countdown and donation totals
 
-- The countdown in the header (`js/countdown.js`) counts days, hours, minutes and seconds to the fair start, 27.11.2026 at 15:00 Israel time. To change the date or time, edit `FAIR_START` at the top of that file (use Israel wall-clock time; daylight saving is handled automatically). After the start it shows "היריד התחיל! מחכים לכם ברחבת המועדון ❤️".
+- The countdown in the header (`js/countdown.js`) counts days, hours, minutes and seconds to the fair start, 27.11.2026 at 15:00 Israel time. To change the date or time, edit `FAIR_START` at the top of that file (use Israel wall-clock time; daylight saving is handled automatically). At the start time the whole countdown element is removed from the page automatically, also on a page that is already open: no message and no empty space are left. It stays hidden on every later visit (the clock decides, and the browser also remembers it in `localStorage` under `gdv-countdown-over`, so a wrong device clock cannot bring it back).
 - The two totals above the filter (`js/stats.js`) are calculated from the eligible vouchers: unique `businessId` values, and the sum of `quantity` (a voucher without `quantity` adds 0). They ignore the category filter, count up once when first visible, and show final values immediately with reduced motion.
+
+## Tests
+
+`node --test tests/` (Node 20.11 or newer, no dependencies) runs the countdown regression tests: the target is 27.11.2026 15:00 Israel time (13:00 UTC) on any machine time zone, the countdown ticks, it is removed at the exact start instant (also in a page that is already open or a background tab), it never shows on later visits, and nothing is left behind.
 
 ## Voucher order
 
