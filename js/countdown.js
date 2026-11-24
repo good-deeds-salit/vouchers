@@ -1,8 +1,26 @@
 // Countdown to the fair: days, hours, minutes and seconds, computed in Israel time.
+// At the start time the whole countdown element is removed from the page (no message, no leftover space), even if the page
+// is already open, and it stays gone on every later visit.
 const TIME_ZONE = "Asia/Jerusalem";
-const FAIR_START = { year: 2026, month: 11, day: 27, hour: 15, minute: 0 }; // wall-clock time in Israel
-const STARTED_MESSAGE = "היריד התחיל! מחכים לכם ברחבת המועדון ❤️";
+const FAIR_START = { year: 2026, month: 11, day: 27, hour: 15, minute: 0 }; // wall-clock time in Israel (= 13:00 UTC, Israel is UTC+2 in November)
 const SECOND_MS = 1000;
+const OVER_KEY = "gdv-countdown-over"; // remembered so a device whose clock is wrong never shows the countdown again
+
+function wasOver() {
+  try {
+    return localStorage.getItem(OVER_KEY) === "1";
+  } catch {
+    return false; // storage blocked (private mode): the clock alone decides
+  }
+}
+
+function markOver() {
+  try {
+    localStorage.setItem(OVER_KEY, "1");
+  } catch {
+    // ignore: the clock still hides it on every later visit
+  }
+}
 
 // Offset (ms) of the time zone from UTC at the given instant, so daylight saving time never needs hard-coding.
 function zoneOffsetMs(instant, timeZone) {
@@ -31,7 +49,7 @@ export function zonedTimeToUtc({ year, month, day, hour, minute }, timeZone = TI
 export const FAIR_START_UTC = zonedTimeToUtc(FAIR_START);
 
 // Remaining time as whole days, hours, minutes and seconds. Seconds round up, so values are never negative
-// and "0 seconds" only appears together with the start message. Returns null once the fair has started.
+// and "0 seconds" is never shown. Returns null once the fair has started.
 export function getRemaining(now = Date.now(), start = FAIR_START_UTC) {
   const remainingMs = start - now;
   if (remainingMs <= 0) return null;
@@ -43,6 +61,8 @@ export function getRemaining(now = Date.now(), start = FAIR_START_UTC) {
     seconds: totalSeconds % 60,
     // ms until the displayed second changes
     nextChangeMs: remainingMs - (totalSeconds - 1) * SECOND_MS,
+    // true during the last second: the next change is the removal itself, so it is scheduled for the exact start instant
+    final: totalSeconds === 1,
   };
 }
 
@@ -74,13 +94,22 @@ export function initCountdown(container) {
     numbers = units.map((entry) => entry.number);
   }
 
+  function onVisible() {
+    if (!document.hidden) render();
+  }
+
+  function remove() {
+    clearTimeout(timer);
+    document.removeEventListener("visibilitychange", onVisible);
+    markOver();
+    container.remove(); // the whole section disappears: no replacement text, no empty space
+  }
+
   function render() {
     clearTimeout(timer);
     const remaining = getRemaining();
     if (remaining === null) {
-      numbers = null;
-      container.className = "countdown countdown--started";
-      container.replaceChildren(STARTED_MESSAGE);
+      remove();
       return;
     }
     if (numbers === null) build();
@@ -89,13 +118,17 @@ export function initCountdown(container) {
       const text = pad(values[index]);
       if (number.textContent !== text) number.textContent = text;
     });
-    timer = setTimeout(render, remaining.nextChangeMs + 20);
+    // +20 ms keeps a tick from firing just before a second boundary; in the last second the timer is exact (render() runs again if it fires a hair early)
+    timer = setTimeout(render, remaining.nextChangeMs + (remaining.final ? 0 : 20));
   }
 
+  if (wasOver()) {
+    container.remove(); // already ended on an earlier visit: never shown again
+    return;
+  }
   render();
+  if (!container.isConnected) return; // it ended right now: nothing more to do
   container.hidden = false;
   // Background tabs throttle timers, so refresh as soon as the page is visible again.
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) render();
-  });
+  document.addEventListener("visibilitychange", onVisible);
 }

@@ -47,19 +47,6 @@
   color: var(--ink-soft);
 }
 
-.countdown--started {
-  display: block;
-  width: auto;
-  padding: 0;
-  border: 0;
-  background: none;
-  box-shadow: none;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-wrap: balance;
-}
-
 .stats {
   display: flex;
   justify-content: center;
