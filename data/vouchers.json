@@ -599,6 +599,28 @@
       "redemptionLocation": "בסלעית, במכון הפיזיותרפיה.",
       "published": true,
       "isDemo": false
+    },
+    {
+      "id": "v-031",
+      "businessId": "b-029",
+      "businessName": "לילא",
+      "offer": "שיעור היכרות",
+      "voucherValue": 50,
+      "discountedPrice": 25,
+      "quantity": 10,
+      "description": "לילא – מקום להתחבר. בית ליוגה, סדנאות ותוכן מחבר.\nבסטודיו מתקיימים מגוון סגנונות של שיעורי יוגה לאורך כל ימות השבוע.\nמוזמנים לבוא להתנסות.",
+      "logo": "assets/images/b-029-logo.jpg",
+      "image": "assets/images/b-029-photo.jpg",
+      "imageAlt": "סטודיו לילא: מזרנים, כריות ומגשי כלי נגינה לטיפול בצליל",
+      "category": "גוף ונפש",
+      "secondaryCategories": [],
+      "expirationDate": "2027-02-28",
+      "phone": "052-351-2064",
+      "website": "https://www.instagram.com/leela.friends",
+      "terms": "למימוש השוברים ליצור קשר עם גל אביב. שיעור היכרות נועד להתנסות ראשונה בלבד. שובר אחד לאדם.",
+      "redemptionLocation": "לילא – מקום להתחבר, באזור התעשייה בסלעית.",
+      "published": true,
+      "isDemo": false
     }
   ]
 }
